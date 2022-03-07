@@ -134,6 +134,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Rundle](https://furstenheim.github.io/react-wordle/): Like wordle, but only last three guesses are considered.
 - [Stockle](https://stockle.win/): Guess the stock or ETF
 - [Syscordle](https://nezza.github.io/syscordle/): SYSCALL
+- [TwoKinds](https://twokinds.me): There's only two kinds of people in this World.
 - [UNLOCOdle](https://unlocodle.collabital.com/): UNLOCODEs
 - [Visionle](https://orisenbazuru.github.io/visionle/): Guess the label of randomly chosen image from ImageNet/ImageNet-Sketch dataset (Machine learning)
 - [0xdle](https://0xdle.vercel.app/): Hexadecimal
