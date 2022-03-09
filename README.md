@@ -142,9 +142,19 @@ _Want to add one to the list? Just make a pull request or [let us know via a com
 
 ### How can I change the length of a guess?
 
-- Update the `MAX_WORD_LENGTH` variable in [src/constants/settings.ts](src/constants/settings.ts) to the desired length.
+The default configuration is for solutions and guesses of length five, but it is flexible enough to handle other lengths, even variable lengths each day.
+
+To configure for a different constant length:
+
 - Update the `WORDS` array in [src/constants/wordlist.ts](src/constants/wordlist.ts) to only include words of the new length.
-- Update the `VALID_GUESSES` array in [src/constants/validGuesses.ts](src/constants/validGuesses.ts) arrays to only include words of the new length.
+- Update the `VALID_GUESSES` array in [src/constants/validGuesses.ts](src/constants/validGuesses.ts) to only include words of the new length.
+
+To configure for variable lengths:
+
+- Update the `WORDS` array in [src/constants/wordlist.ts](src/constants/wordlist.ts) to include words of any of the variable lengths desired.
+- Update the `VALID_GUESSES` array in [src/constants/validGuesses.ts](src/constants/validGuesses.ts) to include words of any of the variable lengths desired.
+
+Note that guesses are validated against both the length of the solution, and presence in VALID_GUESSES.
 
 ### How can I create a version in another language?
 
