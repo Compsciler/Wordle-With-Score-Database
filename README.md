@@ -91,6 +91,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Birdle - Emojis](https://birdle.dev): Bird emojis
 - [Birdle](https://www.creek-birdle.com/): Birds
 - [Buildly](https://buildly.procurepro.co/): Construction themed
+- [Chipotle](https://chipotlele.herokuapp.com): Chipotle (food, items, etc.) themed
 - [Crosswordle](https://crosswordle.mekoppe.com/): Crossword mashup
 - [Dundle](https://dundle.dunmiffcord.com/): The Office
 - [FFXIVrdle](https://ffxivrdle.com/): Final Fantasy XIV
@@ -98,6 +99,7 @@ Open [http://localhost](http://localhost) in browser.
 - [JoJodle](https://jojo-news.com/fun/jojodle/): JoJo’s Bizarre Adventure
 - [Mahjong Handle](https://mahjong-handle.update.sh/): Mahjong Hands
 - [Filmle](https://filmle.now.sh/): Movie titles
+- [Marvle](https://marvle.herokuapp.com): Superhero (Marvel and DC) themed
 - [Movie Wordle](https://movie-wordle.vercel.app): Bollywood
 - [Murdle](https://murdle.vercel.app/): Spooky hangman mashup
 - [Poker Handle](https://kikychow.github.io/poker-wordle/): Poker
