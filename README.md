@@ -46,6 +46,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Jwordle](https://jwordle.vercel.app/): Japanese
 - [Keclap](https://keclap.xyz/): Sundanese
 - [Kelmaly](https://kelmaly.com/): Arabic
+- [Kerdle](https://kerdle.vercel.app/): Cornish/Kernewek (Standard Written Form)
 - [Latindictionary.io](https://wordle.latindictionary.io/): Latin
 - [Lexoula](https://lexoula.com/): Ελληνικά (Greek)
 - [Malay](https://malay-wordle.netlify.app/): Bahasa Malaysia
