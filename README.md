@@ -121,6 +121,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Numble](https://rbrignall.github.io/numble/): Maths
 - [Opsle](https://opsle.vercel.app/): Ops
 - [Passwordle](https://passwordle.sp8c3.com/): Passwords
+- [Perfdle](https://perfdle.com): Performance Testers and Engineers, DevOps, and Observability
 - [Primel](https://converged.yt/primel/): Prime numbers
 - [Qwordle](https://qwordle.bhat.ca/): Quantum version of Wordle (uses entangled word-pairs)
 - [Quantle](https://deduckproject.github.io/quantle/): Another quantum variant where guesses are quantum equations
