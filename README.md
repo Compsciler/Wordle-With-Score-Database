@@ -131,6 +131,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Syscordle](https://nezza.github.io/syscordle/): SYSCALL
 - [UNLOCOdle](https://unlocodle.collabital.com/): UNLOCODEs
 - [Visionle](https://orisenbazuru.github.io/visionle/): Guess the label of randomly chosen image from ImageNet/ImageNet-Sketch dataset (Machine learning)
+- [0xdle](https://0xdle.vercel.app/): Hexadecimal
 
 _Want to add one to the list? Just make a pull request or [let us know via a comment here](https://github.com/cwackerfuss/react-wordle/issues/120)_
 
