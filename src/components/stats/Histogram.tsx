@@ -16,7 +16,7 @@ export const Histogram = ({ gameStats, numberOfGuessesMade }: Props) => {
         <Progress
           key={i}
           index={i}
-          currentDayStatRow={numberOfGuessesMade === i + 1}
+          isCurrentDayStatRow={numberOfGuessesMade === i + 1}
           size={90 * (value / maxValue)}
           label={String(value)}
         />
