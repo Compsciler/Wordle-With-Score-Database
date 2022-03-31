@@ -43,6 +43,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Arwordle](https://arwordle.netlify.app/): Arabic
 - [Boludle](https://www.boludle.com/): Argentinian
 - [Gerdle](https://gerdle.vext.co.uk/): Cornish (Kernowek)
+- [Jwordle](https://jwordle.vercel.app/): Japanese
 - [Keclap](https://keclap.xyz/): Sundanese
 - [Kelmaly](https://kelmaly.com/): Arabic
 - [Latindictionary.io](https://wordle.latindictionary.io/): Latin
@@ -58,7 +59,7 @@ Open [http://localhost](http://localhost) in browser.
 - [Sindhal](https://hellosindh.com/sindhal): Sindhi
 - [Szózat](https://szozat.miklosdanka.com/): Hungarian
 - [Tàu Tâi-gí (Taigi Wordle)](https://tau.taigi.info/): Taigi (Taiwanese)
-- [Tlembung](https://tlembung.vercel.app/): Japanese
+- [Tlembung](https://tlembung.vercel.app/): Javanese
 - [Tugma](https://tugma.vercel.app): Hiligaynon (spoken in the Philippines)
 - [Ukrainian](https://goroh.pp.ua/games/wordle): Ukrainian
 - [Urdle](https://urdle.chaoticity.com/): Urdu
