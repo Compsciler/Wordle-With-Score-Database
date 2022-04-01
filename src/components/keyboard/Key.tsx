@@ -54,7 +54,7 @@ export const Key = ({
   }
 
   return (
-    <button style={styles} className={classes} onClick={handleClick}>
+    <button style={styles} aria-label={`${value} ${status}`} className={classes} onClick={handleClick}>
       {children || value}
     </button>
   )
