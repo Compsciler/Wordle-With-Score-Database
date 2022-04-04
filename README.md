@@ -79,6 +79,7 @@ Open [http://localhost](http://localhost) in browser.
 - [꼬들 - 한국어](https://belorin.github.io/): Korean
 - [한글 풀어쓰기 5자](https://nakosung.github.io/wordle/): Korean
 - [ไทย](https://buddhistuniversity.net/wordle-thai/): Thai
+- [ಕನ್ನಡ](https://www.aksharabandha.co.in/): Kannada
 
 ### Fun themes
 
