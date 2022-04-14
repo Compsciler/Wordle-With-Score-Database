@@ -100,6 +100,8 @@ Open [http://localhost](http://localhost) in browser.
 - [Poker Handle](https://kikychow.github.io/poker-wordle/): Poker
 - [Quettale](https://quettale.vercel.app/): Quenya, Elven language in LOTR
 - [Radiole](https://radiole.vercel.app/): Radio-themed (for World Radio Day)
+- [RareWordle](https://rwordle.vercel.app/): Word guessing with multiple solutions each day where the goal is to find the most obscure one. It is inspired by the TV game show Pointless.
+- [Reverdle](https://reverdle.now.sh/): It's Wordle but in reverse, that is one hast to make as many guesses possible without having one green letter (i.e. one letter in the correct location compared to the hidden solution).
 - [Squirdle](https://squirdle-inky.vercel.app/): Pokeman
 - [Taylordle](https://www.taylordle.com/): Taylor Swift
 - [Trekle](https://treklegame.com): Star Trek
