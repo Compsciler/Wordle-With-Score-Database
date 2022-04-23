@@ -246,6 +246,7 @@ function App() {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
+        // TODO: Send score to database (or near line 167)
       }
     }
   }
