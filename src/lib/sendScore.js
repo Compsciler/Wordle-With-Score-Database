@@ -15,6 +15,7 @@ const scoreSchema = new mongoose.Schema({
     guesses: [String],
     lost: Boolean,
     isHardMode: Boolean,
+    emojiGrid: String
 })
 
 const Score = mongoose.model('Score', scoreSchema)

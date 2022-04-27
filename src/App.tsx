@@ -43,6 +43,7 @@ import { Navbar } from './components/navbar/Navbar'
 import { isInAppBrowser } from './lib/browser'
 
 import scoreService from './services/scores'
+import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -260,12 +261,14 @@ function App() {
 
   const sendScore = (solutionIndex: number, solution: string, guesses: string[], lost: boolean, isHardMode: boolean) => {
     // event.preventDefault()
+    const emojiGrid = generateDefaultEmojiGrid(solution, guesses)
     const scoreObject = {
       solutionIndex,
       solution,
       guesses,
       lost,
       isHardMode,
+      emojiGrid,
     }
 
     scoreService
@@ -273,6 +276,10 @@ function App() {
       .then(res => {
         console.log(res)
       })
+  }
+
+  const generateDefaultEmojiGrid = (solution: string, guesses: string[]) => {
+    return generateEmojiGrid(solution, guesses, getEmojiTiles(false, false))
   }
 
   return (
