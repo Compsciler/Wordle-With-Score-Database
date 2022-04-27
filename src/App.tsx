@@ -70,12 +70,9 @@ function App() {
   )
   const [isRevealing, setIsRevealing] = useState(false)
 
-  const [hasSentDailyScore, setHasSentDailyScore] = useState(false)
-
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
-      setHasSentDailyScore(false)
       return []
     }
     const gameWasWon = loaded.guesses.includes(solution)
@@ -238,16 +235,20 @@ function App() {
       guesses.length < MAX_CHALLENGES &&
       !isGameWon
     ) {
+      const guessesIncludingCurrent = guesses.concat(currentGuess)
+
       setGuesses([...guesses, currentGuess])
       setCurrentGuess('')
 
       if (winningWord) {
         setStats(addStatsForCompletedGame(stats, guesses.length))
+        sendScore(solutionIndex, solution, guessesIncludingCurrent, false, isHardMode)
         return setIsGameWon(true)
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
         setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        sendScore(solutionIndex, solution, guessesIncludingCurrent, true, isHardMode)
         setIsGameLost(true)
         showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
           persist: true,
@@ -256,20 +257,6 @@ function App() {
       }
     }
   }
-
-  // Method called on refresh after game complete
-  useEffect(() => {
-    if (isGameWon && !hasSentDailyScore) {
-      sendScore(solutionIndex, solution, guesses, false, isHardMode)
-      setHasSentDailyScore(true)
-    }
-  }, [isGameWon])
-  useEffect(() => {
-    if (isGameLost && !hasSentDailyScore) {
-      sendScore(solutionIndex, solution, guesses, true, isHardMode)
-      setHasSentDailyScore(true)
-    }
-  }, [isGameLost])
 
   const sendScore = (solutionIndex: number, solution: string, guesses: string[], lost: boolean, isHardMode: boolean) => {
     // event.preventDefault()
