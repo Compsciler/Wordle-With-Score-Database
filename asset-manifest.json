@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/wordle-with-score-database/static/css/main.8376a7a5.css",
+    "main.js": "/wordle-with-score-database/static/js/main.a1f8034e.js",
+    "static/js/787.edb6c86f.chunk.js": "/wordle-with-score-database/static/js/787.edb6c86f.chunk.js",
+    "index.html": "/wordle-with-score-database/index.html",
+    "main.8376a7a5.css.map": "/wordle-with-score-database/static/css/main.8376a7a5.css.map",
+    "main.a1f8034e.js.map": "/wordle-with-score-database/static/js/main.a1f8034e.js.map",
+    "787.edb6c86f.chunk.js.map": "/wordle-with-score-database/static/js/787.edb6c86f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8376a7a5.css",
+    "static/js/main.a1f8034e.js"
+  ]
+}
