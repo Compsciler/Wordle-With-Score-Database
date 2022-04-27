@@ -25,6 +25,7 @@ import {
   solution,
   findFirstUnusedReveal,
   unicodeLength,
+  solutionIndex,
 } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -40,6 +41,9 @@ import { AlertContainer } from './components/alerts/AlertContainer'
 import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
 import { isInAppBrowser } from './lib/browser'
+
+import axios from 'axios'
+import scoreService from './services/scores'
 
 function App() {
   const prefersDarkMode = window.matchMedia(
@@ -236,6 +240,7 @@ function App() {
 
       if (winningWord) {
         setStats(addStatsForCompletedGame(stats, guesses.length))
+        sendScore(solutionIndex, solution, guesses, false, isHardMode)
         return setIsGameWon(true)
       }
 
@@ -246,9 +251,27 @@ function App() {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
-        // TODO: Send score to database (or near line 167)
+        sendScore(solutionIndex, solution, guesses, true, isHardMode)
       }
     }
+  }
+
+  // TODO: Make sure last guess included in guesses array
+  const sendScore = (solutionIndex: number, solution: string, guesses: string[], lost: boolean, isHardMode: boolean) => {
+    // event.preventDefault()
+    const scoreObject = {
+      solutionIndex,
+      solution,
+      guesses,
+      lost,
+      isHardMode,
+    }
+
+    scoreService
+      .create(scoreObject)
+      .then(res => {
+        console.log(res)
+      })
   }
 
   return (
