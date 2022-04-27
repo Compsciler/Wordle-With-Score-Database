@@ -1,3 +1,4 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
 const app = express()
@@ -5,8 +6,7 @@ app.use(express.json())
 const cors = require('cors')
 app.use(cors())
 
-const password = '<PASSWORD>'  // TODO: move to .env file
-const url = `mongodb+srv://roger:${password}@wordlecluster.xrcmw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+const url = process.env.MONGODB_URI
 
 mongoose.connect(url)
 const scoreSchema = new mongoose.Schema({
