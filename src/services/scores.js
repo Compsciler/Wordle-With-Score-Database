@@ -20,5 +20,5 @@ const update = (id, newObject) => {
 }
 */
 
-export default { create }  // scoreService
-// export default { getAll, create, update }
+const scoreService = {create}
+export default scoreService

@@ -42,7 +42,6 @@ import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
 import { isInAppBrowser } from './lib/browser'
 
-import axios from 'axios'
 import scoreService from './services/scores'
 
 function App() {
@@ -70,9 +69,13 @@ function App() {
     getStoredIsHighContrastMode()
   )
   const [isRevealing, setIsRevealing] = useState(false)
+
+  const [hasSentDailyScore, setHasSentDailyScore] = useState(false)
+
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
+      setHasSentDailyScore(false)
       return []
     }
     const gameWasWon = loaded.guesses.includes(solution)
@@ -240,7 +243,6 @@ function App() {
 
       if (winningWord) {
         setStats(addStatsForCompletedGame(stats, guesses.length))
-        sendScore(solutionIndex, solution, guesses, false, isHardMode)
         return setIsGameWon(true)
       }
 
@@ -251,12 +253,24 @@ function App() {
           persist: true,
           delayMs: REVEAL_TIME_MS * solution.length + 1,
         })
-        sendScore(solutionIndex, solution, guesses, true, isHardMode)
       }
     }
   }
 
-  // TODO: Make sure last guess included in guesses array
+  // Method called on refresh after game complete
+  useEffect(() => {
+    if (isGameWon && !hasSentDailyScore) {
+      sendScore(solutionIndex, solution, guesses, false, isHardMode)
+      setHasSentDailyScore(true)
+    }
+  }, [isGameWon])
+  useEffect(() => {
+    if (isGameLost && !hasSentDailyScore) {
+      sendScore(solutionIndex, solution, guesses, true, isHardMode)
+      setHasSentDailyScore(true)
+    }
+  }, [isGameLost])
+
   const sendScore = (solutionIndex: number, solution: string, guesses: string[], lost: boolean, isHardMode: boolean) => {
     // event.preventDefault()
     const scoreObject = {
