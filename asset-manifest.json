@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/wordle-with-score-database/static/css/main.8376a7a5.css",
-    "main.js": "/wordle-with-score-database/static/js/main.2b7a8d08.js",
-    "static/js/787.edb6c86f.chunk.js": "/wordle-with-score-database/static/js/787.edb6c86f.chunk.js",
-    "index.html": "/wordle-with-score-database/index.html",
-    "main.8376a7a5.css.map": "/wordle-with-score-database/static/css/main.8376a7a5.css.map",
-    "main.2b7a8d08.js.map": "/wordle-with-score-database/static/js/main.2b7a8d08.js.map",
-    "787.edb6c86f.chunk.js.map": "/wordle-with-score-database/static/js/787.edb6c86f.chunk.js.map"
+    "main.css": "/Wordle-With-Score-Database/static/css/main.8376a7a5.css",
+    "main.js": "/Wordle-With-Score-Database/static/js/main.3d7c1a5c.js",
+    "static/js/787.edb6c86f.chunk.js": "/Wordle-With-Score-Database/static/js/787.edb6c86f.chunk.js",
+    "index.html": "/Wordle-With-Score-Database/index.html",
+    "main.8376a7a5.css.map": "/Wordle-With-Score-Database/static/css/main.8376a7a5.css.map",
+    "main.3d7c1a5c.js.map": "/Wordle-With-Score-Database/static/js/main.3d7c1a5c.js.map",
+    "787.edb6c86f.chunk.js.map": "/Wordle-With-Score-Database/static/js/787.edb6c86f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.8376a7a5.css",
-    "static/js/main.2b7a8d08.js"
+    "static/js/main.3d7c1a5c.js"
   ]
 }
