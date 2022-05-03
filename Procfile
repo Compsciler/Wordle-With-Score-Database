@@ -1,1 +1,1 @@
-web: node .\src\lib\sendScore.js
+web: node .\src\server\index.js

@@ -5,6 +5,7 @@ const app = express()
 app.use(express.json())
 const cors = require('cors')
 app.use(cors())
+const path = require('path')
 
 const url = process.env.MONGODB_URI
 
