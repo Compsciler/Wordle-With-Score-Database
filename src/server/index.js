@@ -50,11 +50,12 @@ app.use(
 )
 */
 
-const scriptSources = ["'self'", 'https://ssl.google-analytics.com', 'https://www.pagespeed-mod.com']
+const scriptSources = ["'self'", "'unsafe-inline'", 'https://ssl.google-analytics.com', 'https://www.pagespeed-mod.com']
 const styleSources = ["'self'", 'https://fonts.googleapis.com']
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
+      defaultSrc: ["'self'"],
       scriptSrc: scriptSources,
       styleSrc: styleSources,
     },
