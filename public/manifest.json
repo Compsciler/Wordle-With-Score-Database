@@ -35,5 +35,6 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#0f172a"
+  "background_color": "#0f172a",
+  "content_security_policy": "script-src 'self' 'unsafe-inline' https://ssl.google-analytics.com https://www.pagespeed-mod.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; object-src 'self'"
 }
