@@ -287,9 +287,9 @@ function App() {
   return (
     <div className="h-screen flex flex-col">
       <Helmet>
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://ssl.google-analytics.com 'unsafe-inline'; script-src 'self' https://ssl.google-analytics.com 'unsafe-inline'" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.pagespeed-mod.com 'unsafe-inline'; script-src 'self' https://www.pagespeed-mod.com 'unsafe-inline'" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://ssl.google-analytics.com 'unsafe-inline'; script-src-elem 'self' https://ssl.google-analytics.com 'unsafe-inline'" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.pagespeed-mod.com 'unsafe-inline'; script-src-elem 'self' https://www.pagespeed-mod.com 'unsafe-inline'" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com 'unsafe-inline'" />
       </Helmet>
       <Navbar
         setIsInfoModalOpen={setIsInfoModalOpen}
