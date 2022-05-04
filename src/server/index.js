@@ -42,14 +42,13 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'))
 })
 
-/*
 app.use(
   helmet({
     contentSecurityPolicy: false,
   })
 )
-*/
 
+/*
 const scriptSources = ["'self'", "'unsafe-inline'", 'https://ssl.google-analytics.com', 'https://www.pagespeed-mod.com']
 const styleSources = ["'self'", 'https://fonts.googleapis.com']
 app.use(
@@ -61,3 +60,4 @@ app.use(
     },
   })
 )
+*/
