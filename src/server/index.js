@@ -6,6 +6,7 @@ app.use(express.json())
 const cors = require('cors')
 app.use(cors())
 const path = require('path')
+const helmet = require("helmet");
 
 const url = process.env.MONGODB_URI
 
@@ -35,8 +36,14 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(express.static(path.join(__dirname, "../build")))
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'));
-});
+  res.sendFile(path.join(__dirname, '../build', 'index.html'))
+})
+
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+)
