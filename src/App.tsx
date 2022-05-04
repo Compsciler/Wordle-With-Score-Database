@@ -45,6 +45,8 @@ import { isInAppBrowser } from './lib/browser'
 import scoreService from './services/scores'
 import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 
+import {Helmet} from 'react-helmet'
+
 function App() {
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
@@ -284,6 +286,11 @@ function App() {
 
   return (
     <div className="h-screen flex flex-col">
+      <Helmet>
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://ssl.google-analytics.com/" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.pagespeed-mod.com" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com" />
+      </Helmet>
       <Navbar
         setIsInfoModalOpen={setIsInfoModalOpen}
         setIsStatsModalOpen={setIsStatsModalOpen}

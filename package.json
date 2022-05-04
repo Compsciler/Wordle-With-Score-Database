@@ -36,6 +36,7 @@
     "react": "^17.0.2",
     "react-countdown": "^2.3.2",
     "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "typescript": "^4.5.4",
@@ -61,6 +62,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.5",
     "autoprefixer": "^10.4.4",
     "gh-pages": "^3.2.3",
     "husky": "^7.0.4",
