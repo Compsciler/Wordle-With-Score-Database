@@ -287,7 +287,9 @@ function App() {
   return (
     <div className="h-screen flex flex-col">
       <Helmet>
+        {/*
         <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src-elem 'self' 'unsafe-inline' https://ssl.google-analytics.com https://www.pagespeed-mod.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; object-src 'self'" />
+        */}
         {/*
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://ssl.google-analytics.com 'unsafe-inline'; script-src-elem 'self' https://ssl.google-analytics.com 'unsafe-inline'" />
         <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.pagespeed-mod.com 'unsafe-inline'; script-src-elem 'self' https://www.pagespeed-mod.com 'unsafe-inline'" />
