@@ -74,6 +74,5 @@
   },
   "lint-staged": {
     "src/*.{ts,tsx,js,jsx,css,md}": "prettier --write"
-  },
-  "homepage": "https://compsciler.github.io/Wordle-With-Score-Database/"
+  }
 }
