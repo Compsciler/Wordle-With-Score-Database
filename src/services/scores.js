@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { axiosInstance } from '../config'
 const baseUrl = 'https://wordle-with-score-database.herokuapp.com/api/scores'
 // const baseUrl = 'http://localhost:3001/api/scores'
 

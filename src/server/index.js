@@ -1,5 +1,3 @@
-console.log('HERE 1')
-
 require('dotenv').config()
 const mongoose = require('mongoose')
 const express = require('express')
@@ -11,8 +9,6 @@ const path = require('path')
 const helmet = require("helmet")
 
 const url = process.env.MONGODB_URI
-
-console.log('HERE 2')
 
 mongoose.connect(url)
 const scoreSchema = new mongoose.Schema({
@@ -40,12 +36,10 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
 
-console.log('HERE 3')
-
-app.use(express.static(path.join(__dirname, "../build")))
+app.use(express.static(path.join(__dirname, 'build')))
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../build', 'index.html'))
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
 })
 
 app.use(
@@ -53,8 +47,6 @@ app.use(
     contentSecurityPolicy: false,
   })
 )
-
-console.log('HERE 4')
 
 /*
 const scriptSources = ["'self'", "'unsafe-inline'", 'https://ssl.google-analytics.com', 'https://www.pagespeed-mod.com']
