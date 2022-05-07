@@ -45,8 +45,6 @@ import { isInAppBrowser } from './lib/browser'
 import scoreService from './services/scores'
 import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 
-import {Helmet} from 'react-helmet'
-
 function App() {
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
@@ -286,16 +284,6 @@ function App() {
 
   return (
     <div className="h-screen flex flex-col">
-      <Helmet>
-        {/*
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src-elem 'self' 'unsafe-inline' https://ssl.google-analytics.com https://www.pagespeed-mod.com; style-src-elem 'self' 'unsafe-inline' https://fonts.googleapis.com; object-src 'self'" />
-        */}
-        {/*
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://ssl.google-analytics.com 'unsafe-inline'; script-src-elem 'self' https://ssl.google-analytics.com 'unsafe-inline'" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://www.pagespeed-mod.com 'unsafe-inline'; script-src-elem 'self' https://www.pagespeed-mod.com 'unsafe-inline'" />
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com 'unsafe-inline'; style-src-elem 'self' https://fonts.googleapis.com 'unsafe-inline'" />
-        */}
-      </Helmet>
       <Navbar
         setIsInfoModalOpen={setIsInfoModalOpen}
         setIsStatsModalOpen={setIsStatsModalOpen}

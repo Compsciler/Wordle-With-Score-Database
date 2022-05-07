@@ -28,13 +28,11 @@
     "dotenv": "^16.0.0",
     "express": "^4.18.0",
     "grapheme-splitter": "1.0.4",
-    "helmet": "^5.0.2",
     "heroku": "^7.60.2",
     "mongoose": "^6.3.1",
     "react": "^17.0.2",
     "react-countdown": "^2.3.2",
     "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "typescript": "^4.5.4",
@@ -60,7 +58,6 @@
     ]
   },
   "devDependencies": {
-    "@types/react-helmet": "^6.1.5",
     "autoprefixer": "^10.4.4",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.2",

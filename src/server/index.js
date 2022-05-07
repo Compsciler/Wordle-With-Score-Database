@@ -6,7 +6,6 @@ app.use(express.json())
 const cors = require('cors')
 app.use(cors())
 const path = require('path')
-const helmet = require("helmet")
 
 const url = process.env.MONGODB_URI
 
@@ -41,23 +40,3 @@ app.use(express.static(path.join(__dirname, '../../build')))
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../../build', 'index.html'))
 })
-
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  })
-)
-
-/*
-const scriptSources = ["'self'", "'unsafe-inline'", 'https://ssl.google-analytics.com', 'https://www.pagespeed-mod.com']
-const styleSources = ["'self'", 'https://fonts.googleapis.com']
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: scriptSources,
-      styleSrc: styleSources,
-    },
-  })
-)
-*/
