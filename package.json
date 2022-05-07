@@ -9,9 +9,7 @@
     "lint": "prettier --check src",
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "prepare": "husky install",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "prepare": "husky install"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
@@ -64,7 +62,6 @@
   "devDependencies": {
     "@types/react-helmet": "^6.1.5",
     "autoprefixer": "^10.4.4",
-    "gh-pages": "^3.2.3",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.2",
     "nodemon": "^2.0.15",
