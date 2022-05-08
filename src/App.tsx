@@ -22,10 +22,11 @@ import {
 import {
   isWordInWordList,
   isWinningWord,
-  solution,
+  isWinningWordOfDay,
+  solution as solutionOfDay,
   findFirstUnusedReveal,
   unicodeLength,
-  solutionIndex,
+  solutionIndex as solutionIndexOfDay,
 } from './lib/words'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
@@ -45,7 +46,30 @@ import { isInAppBrowser } from './lib/browser'
 import scoreService from './services/scores'
 import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 
+import { useMatch } from 'react-router-dom'
+import { getWordBySolutionIndex } from './lib/words'
+import { exampleIds } from './constants/exampleIds'
+
 function App() {
+  const match = useMatch('/examples/:id')
+  const isPlayingExample = match
+  let exampleSolution = undefined
+  let exampleSolutionIndex = undefined
+  let isReturningExampleNotFoundPage = false
+  if (match) {
+    const id = parseInt(match.params.id!)
+    if (!exampleIds.includes(id)) {
+      isReturningExampleNotFoundPage = true
+    }
+    if (!Number.isNaN(id)) {
+      const exampleSolutionAndIndex = getWordBySolutionIndex(id)
+      exampleSolution = exampleSolutionAndIndex.solution
+      exampleSolutionIndex = exampleSolutionAndIndex.solutionIndex
+    }
+  }
+  const solution = exampleSolution !== undefined ? exampleSolution : solutionOfDay  
+  const solutionIndex = exampleSolutionIndex !== undefined ? exampleSolutionIndex : solutionIndexOfDay
+
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
@@ -229,7 +253,11 @@ function App() {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
 
-    const winningWord = isWinningWord(currentGuess)
+    const winningWord = isPlayingExample ? (
+      isWinningWord(currentGuess, solution)
+    ) : (
+      isWinningWordOfDay(currentGuess)
+    )
 
     if (
       unicodeLength(currentGuess) === solution.length &&
@@ -280,6 +308,12 @@ function App() {
 
   const generateDefaultEmojiGrid = (solution: string, guesses: string[]) => {
     return generateEmojiGrid(solution, guesses, getEmojiTiles(false, false))
+  }
+
+  if (isReturningExampleNotFoundPage) {
+    return (
+      <h1>ERROR: EXAMPLE NOT FOUND</h1>
+    )
   }
 
   return (

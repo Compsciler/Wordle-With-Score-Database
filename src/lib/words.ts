@@ -11,8 +11,12 @@ export const isWordInWordList = (word: string) => {
   )
 }
 
-export const isWinningWord = (word: string) => {
-  return solution === word
+export const isWinningWord = (word: string, solution: string) => {
+  return word === solution
+}
+
+export const isWinningWordOfDay = (word: string) => {
+  return isWinningWord(word, solution)
 }
 
 // build a set of previously revealed letters - present and correct
@@ -74,6 +78,13 @@ export const localeAwareUpperCase = (text: string) => {
     : text.toUpperCase()
 }
 
+export const getWordBySolutionIndex = (solutionIndex: number) => {
+  return {
+    solution: localeAwareUpperCase(WORDS[solutionIndex % WORDS.length]),
+    solutionIndex: solutionIndex,
+  }
+}
+
 export const getWordOfDay = () => {
   // January 1, 2022 Game Epoch
   const epoch = new Date(2022, 0)
@@ -89,9 +100,11 @@ export const getWordOfDay = () => {
   const nextDay = new Date(today)
   nextDay.setDate(today.getDate() + 1)
 
+  const solutionAndIndex = getWordBySolutionIndex(index % WORDS.length)
+
   return {
-    solution: localeAwareUpperCase(WORDS[index % WORDS.length]),
-    solutionIndex: index,
+    solution: solutionAndIndex.solution,
+    solutionIndex: solutionAndIndex.solutionIndex,
     tomorrow: nextDay.valueOf(),
   }
 }
