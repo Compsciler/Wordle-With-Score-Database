@@ -4,6 +4,17 @@ This is a clone project of the popular word guessing game we all know and love. 
 
 [**Try out the demo!**](https://reactle.vercel.app/)
 
+## Steps to create a Wordle variant using this template
+
+1. [MongoDB Atlas](https://cloud.mongodb.com/): Create a new project and cluster under that project: [tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
+2. [.env](.env): Set `MONGODB_URI` to the cluster URI
+3. [Heroku Dashboard](https://dashboard.heroku.com/): Click `New` > `Create new app` to create app
+4. [Heroku App Dashboard](https://dashboard.heroku.com/): Follow `Deploy` instructions to connect IDE terminal to app: [tutorial](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
+5. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
+6. [src/constants/](src/constants/): Update files
+7. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
+8. Terminal: Commit files and run `git push heroku master`
+
 ## Build and run
 
 ### To Run Locally:
