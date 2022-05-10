@@ -1,4 +1,5 @@
 const gameStateKey = 'gameState'
+const gameOfDayStateKey = 'gameOfDayState'
 const highContrastKey = 'highContrast'
 
 type StoredGameState = {
@@ -12,6 +13,15 @@ export const saveGameStateToLocalStorage = (gameState: StoredGameState) => {
 
 export const loadGameStateFromLocalStorage = () => {
   const state = localStorage.getItem(gameStateKey)
+  return state ? (JSON.parse(state) as StoredGameState) : null
+}
+
+export const saveGameOfDayStateToLocalStorage = (gameState: StoredGameState) => {
+  localStorage.setItem(gameOfDayStateKey, JSON.stringify(gameState))
+}
+
+export const loadGameOfDayStateFromLocalStorage = () => {
+  const state = localStorage.getItem(gameOfDayStateKey)
   return state ? (JSON.parse(state) as StoredGameState) : null
 }
 

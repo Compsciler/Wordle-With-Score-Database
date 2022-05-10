@@ -22,7 +22,7 @@ export const isWinningWordOfDay = (word: string) => {
 // build a set of previously revealed letters - present and correct
 // guess must use correct letters in that space and any other revealed letters
 // also check if all revealed instances of a letter are used (i.e. two C's)
-export const findFirstUnusedReveal = (word: string, guesses: string[]) => {
+export const findFirstUnusedReveal = (word: string, guesses: string[], solution: string) => {
   if (guesses.length === 0) {
     return false
   }

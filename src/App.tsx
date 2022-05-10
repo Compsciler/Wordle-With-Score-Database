@@ -32,6 +32,8 @@ import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
   loadGameStateFromLocalStorage,
   saveGameStateToLocalStorage,
+  loadGameOfDayStateFromLocalStorage,
+  saveGameOfDayStateToLocalStorage,
   setStoredIsHighContrastMode,
   getStoredIsHighContrastMode,
 } from './lib/localStorage'
@@ -51,13 +53,14 @@ import { getWordBySolutionIndex } from './lib/words'
 import { exampleIds } from './constants/exampleIds'
 
 function App() {
-  const match = useMatch('/examples/:id')
-  const isPlayingExample = match
+  const isPlayingDaily = useMatch('/') !== null
+  const exampleMatch = useMatch('/examples/:id')
+  const isPlayingExample = exampleMatch !== null
   let exampleSolution = undefined
   let exampleSolutionIndex = undefined
   let isReturningExampleNotFoundPage = false
-  if (match) {
-    const id = parseInt(match.params.id!)
+  if (exampleMatch) {
+    const id = parseInt(exampleMatch.params.id!)
     if (!exampleIds.includes(id)) {
       isReturningExampleNotFoundPage = true
     }
@@ -95,9 +98,21 @@ function App() {
   )
   const [isRevealing, setIsRevealing] = useState(false)
 
+  const [guessesOfDay, setGuessesOfDay] = useState<string[]>(() => {
+    const loaded = loadGameOfDayStateFromLocalStorage()
+    if (!loaded) {
+      return []
+    }
+    return loaded.guesses
+  })
   const [guesses, setGuesses] = useState<string[]>(() => {
-    const loaded = loadGameStateFromLocalStorage()
+    const loaded = isPlayingDaily ? 
+      loadGameOfDayStateFromLocalStorage() : 
+      loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
+      if (isPlayingDaily) {
+        setGuessesOfDay([])
+      }
       return []
     }
     const gameWasWon = loaded.guesses.includes(solution)
@@ -180,6 +195,12 @@ function App() {
   useEffect(() => {
     saveGameStateToLocalStorage({ guesses, solution })
   }, [guesses])
+  useEffect(() => {
+    if (!isPlayingDaily) {
+      return
+    }
+    saveGameOfDayStateToLocalStorage({ guesses, solution })
+  }, [guessesOfDay])
 
   useEffect(() => {
     if (isGameWon) {
@@ -237,7 +258,7 @@ function App() {
 
     // enforce hard mode - all guesses must contain all previously revealed letters
     if (isHardMode) {
-      const firstMissingReveal = findFirstUnusedReveal(currentGuess, guesses)
+      const firstMissingReveal = findFirstUnusedReveal(currentGuess, guesses, solution)
       if (firstMissingReveal) {
         setCurrentRowClass('jiggle')
         return showErrorAlert(firstMissingReveal, {
@@ -267,16 +288,23 @@ function App() {
       const guessesIncludingCurrent = guesses.concat(currentGuess)
 
       setGuesses([...guesses, currentGuess])
+      if (isPlayingDaily) {
+        setGuessesOfDay([...guesses, currentGuess])
+      }
       setCurrentGuess('')
 
       if (winningWord) {
-        setStats(addStatsForCompletedGame(stats, guesses.length))
+        if (!isPlayingExample) {
+          setStats(addStatsForCompletedGame(stats, guesses.length))
+        }
         sendScore(solutionIndex, solution, guessesIncludingCurrent, false, isHardMode)
         return setIsGameWon(true)
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
-        setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        if (!isPlayingExample) {
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        }
         sendScore(solutionIndex, solution, guessesIncludingCurrent, true, isHardMode)
         setIsGameLost(true)
         showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
@@ -349,6 +377,7 @@ function App() {
           isOpen={isStatsModalOpen}
           handleClose={() => setIsStatsModalOpen(false)}
           solution={solution}
+          solutionIndex={solutionIndex}
           guesses={guesses}
           gameStats={stats}
           isGameLost={isGameLost}
