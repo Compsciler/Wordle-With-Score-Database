@@ -70,8 +70,12 @@ function App() {
       exampleSolutionIndex = exampleSolutionAndIndex.solutionIndex
     }
   }
-  const solution = exampleSolution !== undefined ? exampleSolution : solutionOfDay  
-  const solutionIndex = exampleSolutionIndex !== undefined ? exampleSolutionIndex : solutionIndexOfDay
+  const solution =
+    exampleSolution !== undefined ? exampleSolution : solutionOfDay
+  const solutionIndex =
+    exampleSolutionIndex !== undefined
+      ? exampleSolutionIndex
+      : solutionIndexOfDay
 
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
@@ -106,9 +110,9 @@ function App() {
     return loaded.guesses
   })
   const [guesses, setGuesses] = useState<string[]>(() => {
-    const loaded = isPlayingDaily ? 
-      loadGameOfDayStateFromLocalStorage() : 
-      loadGameStateFromLocalStorage()
+    const loaded = isPlayingDaily
+      ? loadGameOfDayStateFromLocalStorage()
+      : loadGameStateFromLocalStorage()
     if (loaded?.solution !== solution) {
       if (isPlayingDaily) {
         setGuessesOfDay([])
@@ -258,7 +262,11 @@ function App() {
 
     // enforce hard mode - all guesses must contain all previously revealed letters
     if (isHardMode) {
-      const firstMissingReveal = findFirstUnusedReveal(currentGuess, guesses, solution)
+      const firstMissingReveal = findFirstUnusedReveal(
+        currentGuess,
+        guesses,
+        solution
+      )
       if (firstMissingReveal) {
         setCurrentRowClass('jiggle')
         return showErrorAlert(firstMissingReveal, {
@@ -274,11 +282,9 @@ function App() {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
 
-    const winningWord = isPlayingExample ? (
-      isWinningWord(currentGuess, solution)
-    ) : (
-      isWinningWordOfDay(currentGuess)
-    )
+    const winningWord = isPlayingExample
+      ? isWinningWord(currentGuess, solution)
+      : isWinningWordOfDay(currentGuess)
 
     if (
       unicodeLength(currentGuess) === solution.length &&
@@ -297,7 +303,13 @@ function App() {
         if (!isPlayingExample) {
           setStats(addStatsForCompletedGame(stats, guesses.length))
         }
-        sendScore(solutionIndex, solution, guessesIncludingCurrent, false, isHardMode)
+        sendScore(
+          solutionIndex,
+          solution,
+          guessesIncludingCurrent,
+          false,
+          isHardMode
+        )
         return setIsGameWon(true)
       }
 
@@ -305,7 +317,13 @@ function App() {
         if (!isPlayingExample) {
           setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         }
-        sendScore(solutionIndex, solution, guessesIncludingCurrent, true, isHardMode)
+        sendScore(
+          solutionIndex,
+          solution,
+          guessesIncludingCurrent,
+          true,
+          isHardMode
+        )
         setIsGameLost(true)
         showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
           persist: true,
@@ -315,7 +333,13 @@ function App() {
     }
   }
 
-  const sendScore = (solutionIndex: number, solution: string, guesses: string[], lost: boolean, isHardMode: boolean) => {
+  const sendScore = (
+    solutionIndex: number,
+    solution: string,
+    guesses: string[],
+    lost: boolean,
+    isHardMode: boolean
+  ) => {
     // event.preventDefault()
     const emojiGrid = generateDefaultEmojiGrid(solution, guesses)
     const scoreObject = {
@@ -327,11 +351,9 @@ function App() {
       emojiGrid,
     }
 
-    scoreService
-      .create(scoreObject)
-      .then(res => {
-        console.log(res)
-      })
+    scoreService.create(scoreObject).then((res) => {
+      console.log(res)
+    })
   }
 
   const generateDefaultEmojiGrid = (solution: string, guesses: string[]) => {
@@ -339,9 +361,7 @@ function App() {
   }
 
   if (isReturningExampleNotFoundPage) {
-    return (
-      <h1>ERROR: EXAMPLE NOT FOUND</h1>
-    )
+    return <h1>ERROR: EXAMPLE NOT FOUND</h1>
   }
 
   return (
@@ -387,6 +407,7 @@ function App() {
           isDarkMode={isDarkMode}
           isHighContrastMode={isHighContrastMode}
           numberOfGuessesMade={guesses.length}
+          isPlayingExample={isPlayingExample}
         />
         <SettingsModal
           isOpen={isSettingsModalOpen}

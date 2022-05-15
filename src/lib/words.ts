@@ -80,7 +80,7 @@ export const localeAwareUpperCase = (text: string) => {
 
 export const getWordBySolutionIndex = (solutionIndex: number) => {
   return {
-    solution: localeAwareUpperCase(WORDS[solutionIndex % WORDS.length]),
+    solution: localeAwareUpperCase(WORDS[solutionIndex]),
     solutionIndex: solutionIndex,
   }
 }

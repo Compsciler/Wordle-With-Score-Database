@@ -26,6 +26,7 @@ type Props = {
   isDarkMode: boolean
   isHighContrastMode: boolean
   numberOfGuessesMade: number
+  isPlayingExample: boolean
 }
 
 export const StatsModal = ({
@@ -42,18 +43,8 @@ export const StatsModal = ({
   isDarkMode,
   isHighContrastMode,
   numberOfGuessesMade,
+  isPlayingExample,
 }: Props) => {
-  if (gameStats.totalGames <= 0) {
-    return (
-      <BaseModal
-        title={STATISTICS_TITLE}
-        isOpen={isOpen}
-        handleClose={handleClose}
-      >
-        <StatBar gameStats={gameStats} />
-      </BaseModal>
-    )
-  }
   return (
     <BaseModal
       title={STATISTICS_TITLE}
@@ -69,6 +60,11 @@ export const StatsModal = ({
         isGameWon={isGameWon}
         numberOfGuessesMade={numberOfGuessesMade}
       />
+      {isPlayingExample && (
+        <div className="mt-5 dark:text-white">
+          <h5>(Statistics not affected by example games)</h5>
+        </div>
+      )}
       {(isGameLost || isGameWon) && (
         <div className="mt-5 sm:mt-6 columns-2 dark:text-white">
           <div>
