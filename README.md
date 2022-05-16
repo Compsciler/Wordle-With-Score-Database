@@ -6,19 +6,35 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 
 ## Steps to create a Wordle variant using this template
 
-1. Clone this repository as an independent copy: [tutorial](https://handong1587.github.io/linux_study/2015/12/18/create-multi-forks.html)
-2. [MongoDB Atlas](https://cloud.mongodb.com/): Create a new project and cluster under that project: [tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
-3. [.env](.env): Set `MONGODB_URI` to the cluster URI
-4. [Heroku Dashboard](https://dashboard.heroku.com/): Click `New` > `Create new app` to create app
-5. Terminal: Follow `Deploy` instructions in [Heroku App Dashboard](https://dashboard.heroku.com/) to connect IDE terminal to app: [tutorial](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
-6. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
-7. [public/manifest.json](public/manifest.json): Update `name`, `short_name`
-8. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial in InfoModal (JSX Element) 
-9. [src/constants/](src/constants/): Update files
-10. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
-11. Terminal: Commit files and run `git push heroku main`
+1. GitHub: Create an empty repository for the new game
+2. Terminal: Clone this repository as an independent copy: [see below](#step-1-commands)
+3. Terminal: Run `npm install`
+4. [MongoDB Atlas](https://cloud.mongodb.com/): Create a new project and cluster under that project: [tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
+5. [.env](.env): Set `MONGODB_URI` to the cluster URI
+6. [Heroku Dashboard](https://dashboard.heroku.com/): Click `New` > `Create new app` to create app
+7. Terminal: Follow `Deploy` instructions in [Heroku App Dashboard](https://dashboard.heroku.com/) to connect IDE terminal to app: [tutorial](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
+8. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
+9. [public/manifest.json](public/manifest.json): Update `name`, `short_name`
+10. [src/services/scores.js](src/services/scores.js): Update `baseUrl`
+11. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial in InfoModal (JSX Element) 
+12. [src/constants/](src/constants/): Update files
+13. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
+14. Terminal: Commit files and run `git push heroku main`
 
-Advanced variant changes (such as adding a new language or new rules) will involve changing more components.
+Advanced variant changes (such as adding a new language or new rules) will involve changing more components. To generate a new word list based on the existing word lists, write the `get_word_list()` function in `wordlistgenerator/main.py` and run `python3 wordlistgenerator/main.py` to get a JSON file of the new word list.
+
+### Step 1 commands
+
+[Original tutorial](https://handong1587.github.io/linux_study/2015/12/18/create-multi-forks.html)
+```bash
+$> git clone https://github.com/Compsciler/Wordle-With-Score-Database.git <game name>
+$> cd <game name>
+$> git remote -v
+$> git remote rename origin upstream
+$> git remote add origin <new remote GitHub URL>
+$> git remote -v
+$> git push -u origin main
+```
 
 ## Build and run
 
