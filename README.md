@@ -6,16 +6,17 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 
 ## Steps to create a Wordle variant using this template
 
-1. [MongoDB Atlas](https://cloud.mongodb.com/): Create a new project and cluster under that project: [tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
-2. [.env](.env): Set `MONGODB_URI` to the cluster URI
-3. [Heroku Dashboard](https://dashboard.heroku.com/): Click `New` > `Create new app` to create app
-4. Terminal: Follow `Deploy` instructions in [Heroku App Dashboard](https://dashboard.heroku.com/) to connect IDE terminal to app: [tutorial](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
-5. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
-6. [public/manifest.json](public/manifest.json): Update `name`, `short_name`
-7. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial in InfoModal (JSX Element) 
-8. [src/constants/](src/constants/): Update files
-9. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
-10. Terminal: Commit files and run `git push heroku main`
+1. Clone this repository as an independent copy: [tutorial](https://handong1587.github.io/linux_study/2015/12/18/create-multi-forks.html)
+2. [MongoDB Atlas](https://cloud.mongodb.com/): Create a new project and cluster under that project: [tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
+3. [.env](.env): Set `MONGODB_URI` to the cluster URI
+4. [Heroku Dashboard](https://dashboard.heroku.com/): Click `New` > `Create new app` to create app
+5. Terminal: Follow `Deploy` instructions in [Heroku App Dashboard](https://dashboard.heroku.com/) to connect IDE terminal to app: [tutorial](https://devcenter.heroku.com/articles/git#create-a-heroku-remote)
+6. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
+7. [public/manifest.json](public/manifest.json): Update `name`, `short_name`
+8. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial in InfoModal (JSX Element) 
+9. [src/constants/](src/constants/): Update files
+10. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
+11. Terminal: Commit files and run `git push heroku main`
 
 Advanced variant changes (such as adding a new language or new rules) will involve changing more components.
 
@@ -26,7 +27,7 @@ Advanced variant changes (such as adding a new language or new rules) will invol
 Clone the repository and perform the following command line actions:
 
 ```bash
-$> cd react-wordle
+$> cd Wordle-With-Score-Database
 $> npm install
 $> npm run start
 ```
