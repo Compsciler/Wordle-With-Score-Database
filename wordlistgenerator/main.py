@@ -22,4 +22,5 @@ list_to_json_file(new_word_list, new_word_list_file)
 
 old_valid_guesses = json_file_to_list(old_valid_guesses_json_file)
 new_valid_guesses = get_word_list(old_valid_guesses)
+new_valid_guesses.sort()
 list_to_json_file(new_valid_guesses, new_valid_guesses_file)
