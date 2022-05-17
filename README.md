@@ -16,12 +16,12 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 8. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
 9. [public/manifest.json](public/manifest.json): Update `name`, `short_name`
 10. [src/services/scores.js](src/services/scores.js): Update `baseUrl`
-11. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial in InfoModal (JSX Element) 
+11. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial and GitHub link in InfoModal (JSX Element) 
 12. [src/constants/](src/constants/): Update files
 13. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
 14. Terminal: Commit files and run `git push heroku main`
 
-Advanced variant changes (such as adding a new language or new rules) will involve changing more components. To generate a new word list based on the existing word lists, write the `get_word_list()` function in `wordlistgenerator/main.py` and run `python3 wordlistgenerator/main.py` to get a JSON file of the new word list.
+Advanced variant changes (such as adding a new language or new rules) will involve changing more components. To generate a new word list based on the existing word lists, write the `get_word_list()` function in `wordlistgenerator/main.py` and run `cd wordlistgenerator`, `python3 main.py` to get a JSON file of the new word list.
 
 ### Step 1 commands
 
