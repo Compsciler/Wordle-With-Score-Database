@@ -26,7 +26,7 @@ export const shareStatus = (
     generateEmojiGrid(
       solution,
       guesses,
-      getEmojiTiles(isDarkMode, isHighContrastMode)
+      getEmojiTiles(false, isHighContrastMode)
     )
 
   const shareData = { text: textToShare }
