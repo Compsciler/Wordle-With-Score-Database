@@ -44,6 +44,13 @@ $> git push -u origin main
 4. Terminal: Run `python3 main.py` to get a JSON file of the new word lists
 5. [src/constants/](src/constants/): Update [src/constants/wordlist.ts](src/constants/wordlist.ts) and [src/constants/validGuesses.ts](src/constants/validGuesses.ts) with the arrays from the new JSON files
 
+### Validating words without valid guesses list
+
+1. [src/constants/validGuesses.ts](src/constants/validGuesses.ts): Delete file
+2. [src/constants/validChars.ts](src/constants/validChars.ts): Update `VALID_CHARS`
+3. [src/components/keyboard/Keyboard.tsx](src/components/keyboard/Keyboard.tsx): Uncomment `isValidKey()` function, `if (isValidKey(key))` block (and delete previous block), and `VALID_CHARS` import
+4. [src/lib/words.ts](src/lib/words.ts): Uncomment `isWordInWordList` and `isValidWord` functions (and delete old `isWordInWordList` function), `isValidKey` import
+
 ### Syncing fork with changes to this repo
 
 [Original tutorial](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork)
@@ -55,6 +62,11 @@ Terminal:
 4. Run `git merge upstream/main` and resolve any merge conflicts
 5. If ran `git stash` for Step 3, run `git stash pop`
 
+### MongoDB Atlas database information
+
+[MongoDB ObjectId to Timestamp Converter](https://steveridout.com/mongo-object-time/)
+
+M0 free-tier cluster backups: Look into [mongodump](https://www.mongodb.com/docs/v4.2/reference/program/mongodump/) or [mongoexport](https://www.mongodb.com/docs/v4.2/reference/program/mongoexport/)
 
 ## Build and run
 
