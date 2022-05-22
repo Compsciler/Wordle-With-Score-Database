@@ -93,6 +93,12 @@ export const localeAwareUpperCase = (text: string) => {
 }
 
 export const getWordBySolutionIndex = (solutionIndex: number) => {
+  if (solutionIndex < 0 || solutionIndex >= WORDS.length) {
+    return {
+      solution: '',
+      solutionIndex: -1
+    }
+  }
   return {
     solution: localeAwareUpperCase(WORDS[solutionIndex]),
     solutionIndex: solutionIndex,

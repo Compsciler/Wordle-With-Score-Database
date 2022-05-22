@@ -64,10 +64,13 @@ function App() {
     if (!exampleIds.includes(id)) {
       isReturningExampleNotFoundPage = true
     }
-    if (!Number.isNaN(id) && id >= 0) {
+    if (!Number.isNaN(id)) {
       const exampleSolutionAndIndex = getWordBySolutionIndex(id)
       exampleSolution = exampleSolutionAndIndex.solution
       exampleSolutionIndex = exampleSolutionAndIndex.solutionIndex
+      if (exampleSolutionIndex === -1) {
+        isReturningExampleNotFoundPage = true
+      }
     }
   }
   const solution =

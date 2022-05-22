@@ -70,14 +70,24 @@ M0 free-tier cluster backups: Look into [mongodump](https://www.mongodb.com/docs
 
 ## Build and run
 
-### To Run Locally:
+### To run locally:
 
 Clone the repository and perform the following command line actions:
+#### Initial steps
 
 ```bash
 $> cd Wordle-With-Score-Database
 $> npm install
-$> npm run start
+```
+
+#### Running and testing
+
+```bash
+$> npm start
+```
+In a new terminal:
+```bash
+$> node ./src/server/index.js
 ```
 
 ### To build/run docker container:
