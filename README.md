@@ -19,7 +19,7 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 11. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial and GitHub link in InfoModal (JSX Element) 
 12. [src/constants/](src/constants/): Update files
 13. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
-14. Terminal: Commit files and run `git push heroku main`
+14. Terminal: Commit files (except `MONGODB_URI` in .env file) and run `git push heroku main`
 
 Advanced variant changes (such as adding a new language or new rules) will involve changing more components.
 
@@ -27,13 +27,13 @@ Advanced variant changes (such as adding a new language or new rules) will invol
 
 [Original tutorial](https://handong1587.github.io/linux_study/2015/12/18/create-multi-forks.html)
 ```bash
-$> git clone https://github.com/Compsciler/Wordle-With-Score-Database.git <game name>
-$> cd <game name>
-$> git remote -v
-$> git remote rename origin upstream
-$> git remote add origin <new remote GitHub URL>
-$> git remote -v
-$> git push -u origin main
+git clone https://github.com/Compsciler/Wordle-With-Score-Database.git <game name>
+cd <game name>
+git remote -v
+git remote rename origin upstream
+git remote add origin <new remote GitHub URL>
+git remote -v
+git push -u origin main
 ```
 
 ### Generating new word lists based on existing word lists
@@ -76,18 +76,18 @@ Clone the repository and perform the following command line actions:
 #### Initial steps
 
 ```bash
-$> cd Wordle-With-Score-Database
-$> npm install
+cd Wordle-With-Score-Database
+npm install
 ```
 
 #### Running and testing
 
 ```bash
-$> npm start
+npm start
 ```
 In a new terminal:
 ```bash
-$> node ./src/server/index.js
+node ./src/server/index.js
 ```
 
 ### To build/run docker container:
@@ -95,8 +95,8 @@ $> node ./src/server/index.js
 #### Development
 
 ```bash
-$> docker build -t reactle:dev -f docker/Dockerfile .
-$> docker run -d -p 3000:3000 --name reactle-dev reactle:dev
+docker build -t reactle:dev -f docker/Dockerfile .
+docker run -d -p 3000:3000 --name reactle-dev reactle:dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in browser.
@@ -104,8 +104,8 @@ Open [http://localhost:3000](http://localhost:3000) in browser.
 #### Production
 
 ```bash
-$> docker build --target=prod -t reactle:prod -f docker/Dockerfile .
-$> docker run -d -p 80:8080  --name reactle-prod reactle:prod
+docker build --target=prod -t reactle:prod -f docker/Dockerfile .
+docker run -d -p 80:8080  --name reactle-prod reactle:prod
 ```
 
 Open [http://localhost](http://localhost) in browser.
