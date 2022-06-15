@@ -16,10 +16,11 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 8. [.env](.env): Update `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`
 9. [public/manifest.json](public/manifest.json): Update `name`, `short_name`
 10. [src/services/scores.js](src/services/scores.js): Update `baseUrl`
-11. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial and GitHub link in InfoModal (JSX Element) 
-12. [src/constants/](src/constants/): Update files
-13. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
-14. Terminal: Commit files (except `MONGODB_URI` in .env file) and run `git push heroku main`
+11. [src/lib/share.ts](src/lib/share.ts): Update `gameUrl`
+12. [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx): Update tutorial and GitHub link in InfoModal (JSX Element) 
+13. [src/constants/](src/constants/): Update files
+14. [Heroku App Dashboard](https://dashboard.heroku.com/): Under the settings tab, update the config vars `REACT_APP_GAME_NAME`, `REACT_APP_GAME_DESCRIPTION`, `MONGODB_URI`, `NODE_ENV=production`
+15. Terminal: Commit files (except `MONGODB_URI` in .env file) and run `git push heroku main`
 
 Advanced variant changes (such as adding a new language or new rules) will involve changing more components.
 
@@ -62,11 +63,16 @@ Terminal:
 4. Run `git merge upstream/main` and resolve any merge conflicts
 5. If ran `git stash` for Step 3, run `git stash pop`
 
-### MongoDB Atlas database information
+### Creating a score database backup
+
+After downloading and opening [MongoDB Compass](https://www.mongodb.com/products/compass):
+1. Enter the URI of the MongoDB instance to connect to and click "Connect"
+2. Click the Databases tab > `myFirstDatabase` > `scores`
+3. Click the "Export Collection" icon and export the full collection and all fields to a JSON file (and enter output filename)
+
+Backing up from the terminal (not tested): look into [mongodump](https://www.mongodb.com/docs/v4.2/reference/program/mongodump/) or [mongoexport](https://www.mongodb.com/docs/v4.2/reference/program/mongoexport/) here: [tutorial](https://www.youtube.com/playlist?list=PLC3y8-rFHvwh11bWtwm3_qKvo46uDmaal)
 
 [MongoDB ObjectId to Timestamp Converter](https://steveridout.com/mongo-object-time/)
-
-M0 free-tier cluster backups: Look into [mongodump](https://www.mongodb.com/docs/v4.2/reference/program/mongodump/) or [mongoexport](https://www.mongodb.com/docs/v4.2/reference/program/mongoexport/)
 
 ## Build and run
 

@@ -120,8 +120,10 @@ function App() {
       if (isPlayingDaily) {
         setGuessesOfDay([])
       }
+      // Reset other game state variables here (if not already reset by useState)
       return []
     }
+    // Load other game state variables here and below
     const gameWasWon = loaded.guesses.includes(solution)
     if (gameWasWon) {
       setIsGameWon(true)

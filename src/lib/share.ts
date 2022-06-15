@@ -8,6 +8,7 @@ const webShareApiDeviceTypes: string[] = ['mobile', 'smarttv', 'wearable']
 const parser = new UAParser()
 const browser = parser.getBrowser()
 const device = parser.getDevice()
+const gameUrl = 'https://wordle-with-score-database.herokuapp.com/'
 
 export const shareStatus = (
   solution: string,
@@ -27,8 +28,9 @@ export const shareStatus = (
       solution,
       guesses,
       getEmojiTiles(false, isHighContrastMode)
-    )
-
+    ) + '\n\n' +
+    gameUrl
+  
   const shareData = { text: textToShare }
 
   let shareSuccess = false
