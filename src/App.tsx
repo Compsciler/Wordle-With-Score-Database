@@ -366,7 +366,11 @@ function App() {
   }
 
   if (isReturningExampleNotFoundPage) {
-    return <h1>ERROR: EXAMPLE NOT FOUND</h1>
+    return (
+      <p className="flex justify-center mt-4 dark:text-white text-lg">
+        ERROR: EXAMPLE NOT FOUND
+      </p>
+    )
   }
 
   return (
