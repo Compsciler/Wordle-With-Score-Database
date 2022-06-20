@@ -74,6 +74,10 @@ Backing up from the terminal (not tested): look into [mongodump](https://www.mon
 
 [MongoDB ObjectId to Timestamp Converter](https://steveridout.com/mongo-object-time/)
 
+### Using a link management platform
+
+This game uses [Rebrandly](https://www.rebrandly.com/) to create shareable links for each game. The source and destination URLs can be edited in case a game server becomes overloaded and a new game server URL is used. The Rebrandly dashboard also displays link analytics and includes support for custom domains.
+
 ## Build and run
 
 ### To run locally:
