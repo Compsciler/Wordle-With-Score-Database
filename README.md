@@ -120,6 +120,37 @@ docker run -d -p 80:8080  --name reactle-prod reactle:prod
 
 Open [http://localhost](http://localhost) in browser.
 
+## My Wordle spinoff games
+
+[Bigramle](https://github.com/Compsciler/Bigramle)
+
+[Bigramle+](https://github.com/Compsciler/Bigramle-Plus)
+
+[Caesardle](https://github.com/Compsciler/Caesardle)
+
+[Codle](https://github.com/Compsciler/Codle)
+
+[Is That Even A Wordle](https://github.com/Compsciler/Is-That-Even-A-Wordle)
+
+[Metalloidle](https://github.com/Compsciler/Metalloidle)
+
+[Notwordle](https://github.com/Compsciler/Notwordle)
+
+[Numerle](https://github.com/Compsciler/Numerle)
+
+[Phone Numble](https://github.com/Compsciler/Phone-Numble)
+
+[Repeatle](https://github.com/Compsciler/Repeatle)
+
+[Subredditle](https://github.com/Compsciler/Subredditle)
+
+[Usernamle](https://github.com/Compsciler/Usernamle)
+
+[Verticle](https://github.com/Compsciler/Verticle)
+
+[Worwordle](https://github.com/Compsciler/Worwordle)
+
+[Worwordle+](https://github.com/Compsciler/Worwordle-Plus)
 
 ## FAQ
 
