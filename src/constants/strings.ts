@@ -9,6 +9,7 @@ export const HARD_MODE_ALERT_MESSAGE =
 export const HARD_MODE_DESCRIPTION =
   'Any revealed hints must be used in subsequent guesses'
 export const HIGH_CONTRAST_MODE_DESCRIPTION = 'For improved color vision'
+export const MANUAL_SHARE_TEXT_DESCRIPTION = 'Display emoji share grid on Statistics window (turn on if Share button not working)'
 export const CORRECT_WORD_MESSAGE = (solution: string) =>
   `The word was ${solution}`
 export const WRONG_SPOT_MESSAGE = (guess: string, position: number) =>

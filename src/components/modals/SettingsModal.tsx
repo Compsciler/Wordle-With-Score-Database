@@ -3,6 +3,7 @@ import { SettingsToggle } from './SettingsToggle'
 import {
   HARD_MODE_DESCRIPTION,
   HIGH_CONTRAST_MODE_DESCRIPTION,
+  MANUAL_SHARE_TEXT_DESCRIPTION,
 } from '../../constants/strings'
 
 type Props = {
@@ -14,6 +15,8 @@ type Props = {
   handleDarkMode: Function
   isHighContrastMode: boolean
   handleHighContrastMode: Function
+  isManualShareText: boolean
+  handleManualShareText: Function
 }
 
 export const SettingsModal = ({
@@ -25,6 +28,8 @@ export const SettingsModal = ({
   handleDarkMode,
   isHighContrastMode,
   handleHighContrastMode,
+  isManualShareText,
+  handleManualShareText,
 }: Props) => {
   return (
     <BaseModal title="Settings" isOpen={isOpen} handleClose={handleClose}>
@@ -45,6 +50,12 @@ export const SettingsModal = ({
           flag={isHighContrastMode}
           handleFlag={handleHighContrastMode}
           description={HIGH_CONTRAST_MODE_DESCRIPTION}
+        />
+        <SettingsToggle
+          settingName="Manual Share Text"
+          flag={isManualShareText}
+          handleFlag={handleManualShareText}
+          description={MANUAL_SHARE_TEXT_DESCRIPTION}
         />
       </div>
     </BaseModal>
