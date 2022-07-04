@@ -2,7 +2,7 @@
 
 This is an enhanced clone project (forked from [here](https://github.com/cwackerfuss/react-wordle)) of the popular word guessing game we all know and love. Made using React, Typescript, Tailwind, Node.js, Express, and Mongoose.
 
-[**Try out the demo!**](https://wordle-with-score-database.herokuapp.com/)
+[**Try out the demo!**](https://rebrand.ly/wordle-with-score-database/)
 
 ## Steps to create a Wordle variant using this template
 
@@ -63,6 +63,8 @@ Terminal:
 4. Run `git merge upstream/main` and resolve any merge conflicts
 5. If ran `git stash` for Step 3, run `git stash pop`
 
+If you only want to merge a specific upstream commit, for Step 4 instead run `git cherry-pick <commit hash> --no-commit`
+
 ### Creating a score database backup
 
 After downloading and opening [MongoDB Compass](https://www.mongodb.com/products/compass):
@@ -73,6 +75,20 @@ After downloading and opening [MongoDB Compass](https://www.mongodb.com/products
 Backing up from the terminal (not tested): look into [mongodump](https://www.mongodb.com/docs/v4.2/reference/program/mongodump/) or [mongoexport](https://www.mongodb.com/docs/v4.2/reference/program/mongoexport/) here: [tutorial](https://www.youtube.com/playlist?list=PLC3y8-rFHvwh11bWtwm3_qKvo46uDmaal)
 
 [MongoDB ObjectId to Timestamp Converter](https://steveridout.com/mongo-object-time/)
+
+### Viewing basic score analytics
+
+[MongoDB Atlas](https://cloud.mongodb.com/):
+
+1. Click the Charts tab > "Explore Charts"
+2. Click the Data Sources side tab > "Add Data Source", and add the collection from your cluster
+3. Click the Dashboards side tab > "[Your Name]'s Dashboard" > "Add Chart"
+4. Click "Choose a Data Source", and add your source
+5. Customize your chart
+    - Average score by word (treats loss as a score of the maximum number of guesses):
+      - Chart Type: Column (Grouped)
+      - X Axis: `solutionIndex`/`solution`
+      - Y Axis: `guesses` (Array reductions: array length, Aggregate: mean)
 
 ### Using a link management platform
 
@@ -130,7 +146,7 @@ Open [http://localhost](http://localhost) in browser.
 
 [Codle](https://github.com/Compsciler/Codle)
 
-[Is That Even A Wordle](https://github.com/Compsciler/Is-That-Even-A-Wordle)
+[Is That Even a Word? le](https://github.com/Compsciler/Is-That-Even-A-Wordle)
 
 [Metalloidle](https://github.com/Compsciler/Metalloidle)
 
