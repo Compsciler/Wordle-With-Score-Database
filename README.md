@@ -92,7 +92,7 @@ Backing up from the terminal (not tested): look into [mongodump](https://www.mon
 
 ### Using a link management platform
 
-This game uses [Rebrandly](https://www.rebrandly.com/) to create shareable links for each game. The source and destination URLs can be edited in case a game server becomes overloaded and a new game server URL is used. The Rebrandly link dashboard also displays link analytics. Note that support for custom domains and URL parameters requires additional fees.
+This game previously used [Rebrandly](https://www.rebrandly.com/) to create shareable links for each game. The source and destination URLs can be edited in case a game server becomes overloaded and a new game server URL is used. The Rebrandly link dashboard also displays link analytics. Note that support for custom domains and URL parameters requires additional fees.
 
 ## Build and run
 
@@ -138,35 +138,50 @@ Open [http://localhost](http://localhost) in browser.
 
 ## My Wordle spinoff games
 
-[Bigramle](https://github.com/Compsciler/Bigramle)
+[Bigramle](https://github.com/Compsciler/Bigramle):
+Words made of 2-letter bigrams
 
-[Bigramle+](https://github.com/Compsciler/Bigramle-Plus)
+[Bigramle+](https://github.com/Compsciler/Bigramle-Plus):
+Words made of 2-letter bigrams (but harder)
 
-[Caesardle](https://github.com/Compsciler/Caesardle)
+[Caesardle](https://github.com/Compsciler/Caesardle):
+Caesar shifted words
 
-[Codle](https://github.com/Compsciler/Codle)
+[Codle](https://github.com/Compsciler/Codle):
+Special-character heavy code
 
-[Is That Even a Word? le](https://github.com/Compsciler/Is-That-Even-A-Wordle)
+[Is That Even a Word? le](https://github.com/Compsciler/Is-That-Even-A-Wordle):
+Words not in the NYT solution list
 
-[Metalloidle](https://github.com/Compsciler/Metalloidle)
+[Metalloidle](https://github.com/Compsciler/Metalloidle):
+Words made using nonmetal and metalloid elemental symbols
 
-[Notwordle](https://github.com/Compsciler/Notwordle)
+[Notwordle](https://github.com/Compsciler/Notwordle):
+Wordle with 5 very different hints
 
-[Numerle](https://github.com/Compsciler/Numerle)
+[Numerle](https://github.com/Compsciler/Numerle):
+5-digit numbers, with a binary search aspect
 
-[Phone Numble](https://github.com/Compsciler/Phone-Numble)
+[Phone Numble](https://github.com/Compsciler/Phone-Numble):
+Phone numbers
 
-[Repeatle](https://github.com/Compsciler/Repeatle)
+[Repeatle](https://github.com/Compsciler/Repeatle):
+Words with duplicate letters
 
-[Subredditle](https://github.com/Compsciler/Subredditle)
+[Subredditle](https://github.com/Compsciler/Subredditle):
+Subreddits
 
-[Usernamle](https://github.com/Compsciler/Usernamle)
+[Usernamle](https://github.com/Compsciler/Usernamle):
+Usernames
 
-[Verticle](https://github.com/Compsciler/Verticle)
+[Verticle](https://github.com/Compsciler/Verticle):
+Vertical guessing mechanics
 
-[Worwordle](https://github.com/Compsciler/Worwordle)
+[Worwordle](https://github.com/Compsciler/Worwordle):
+Fused words (e.g.: FRESH + SHEEP = FRESHEEP)
 
-[Worwordle+](https://github.com/Compsciler/Worwordle-Plus)
+[Worwordle+](https://github.com/Compsciler/Worwordle-Plus):
+Fused words (e.g.: SIREN + RENEW = SIRENEW)
 
 ## FAQ
 
