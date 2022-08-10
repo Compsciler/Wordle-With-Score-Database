@@ -2,7 +2,7 @@
 
 This is an enhanced clone project (forked from [here](https://github.com/cwackerfuss/react-wordle)) of the popular word guessing game we all know and love. Made using React, Typescript, Tailwind, Node.js, Express, and Mongoose.
 
-[**Try out the demo!**](https://rebrand.ly/wordle-with-score-database/)
+[**Try out the demo!**](https://wordletemplate.herokuapp.com/)
 
 ## Steps to create a Wordle variant using this template
 
