@@ -4,7 +4,9 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 
 [**Try out the website!**](https://wordletemplate.herokuapp.com/)
 
-[**YouTube video with all game demos**](https://www.youtube.com/watch?v=JyKkEyGwLP4)
+[**YouTube video explaining my 15 variants**](https://www.youtube.com/watch?v=JyKkEyGwLP4) **(100k+ views!)**
+
+[**YouTube video compacting the above video to 90 seconds**](https://www.youtube.com/watch?v=e8AO9OmSGe4) **(no commentary)**
 
 ## Steps to create a Wordle variant using this template
 
