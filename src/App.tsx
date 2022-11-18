@@ -15,7 +15,8 @@ import {
 } from './constants/strings'
 import {
   MAX_CHALLENGES,
-  REVEAL_TIME_MS,
+  REVEAL_TIME_MS as REVEAL_TIME_MS_NORMAL,
+  REVEAL_TIME_MS_SPEEDRUN,
   WELCOME_INFO_MODAL_MS,
   DISCOURAGE_INAPP_BROWSERS,
 } from './constants/settings'
@@ -103,6 +104,16 @@ function App() {
   const [isHighContrastMode, setIsHighContrastMode] = useState(
     getStoredIsHighContrastMode()
   )
+  const [isSpeedrunMode, setIsSpeedrunMode] = useState(
+    localStorage.getItem('speedrunMode')
+      ? localStorage.getItem('speedrunMode') === 'on'
+      : false
+  )
+  // To export to other component in future, see https://stackoverflow.com/questions/66727049/exporting-a-state-from-hook-function-to-another-component
+  const REVEAL_TIME_MS = isSpeedrunMode
+    ? REVEAL_TIME_MS_SPEEDRUN
+    : REVEAL_TIME_MS_NORMAL
+
   const [isManualShareText, setIsManualShareText] = useState(
     localStorage.getItem('manualShare')
       ? localStorage.getItem('manualShare') === 'on'
@@ -200,6 +211,11 @@ function App() {
   const handleHighContrastMode = (isHighContrast: boolean) => {
     setIsHighContrastMode(isHighContrast)
     setStoredIsHighContrastMode(isHighContrast)
+  }
+
+  const handleSpeedrunMode = (isSpeedrun: boolean) => {
+    setIsSpeedrunMode(isSpeedrun)
+    localStorage.setItem('speedrunMode', isSpeedrun ? 'on' : 'off')
   }
 
   const handleManualShareText = (isManual: boolean) => {
@@ -438,6 +454,8 @@ function App() {
           handleDarkMode={handleDarkMode}
           isHighContrastMode={isHighContrastMode}
           handleHighContrastMode={handleHighContrastMode}
+          isSpeedrunMode={isSpeedrunMode}
+          handleSpeedrunMode={handleSpeedrunMode}
           isManualShareText={isManualShareText}
           handleManualShareText={handleManualShareText}
         />

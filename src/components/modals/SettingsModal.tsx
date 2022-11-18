@@ -4,6 +4,7 @@ import {
   HARD_MODE_DESCRIPTION,
   HIGH_CONTRAST_MODE_DESCRIPTION,
   MANUAL_SHARE_TEXT_DESCRIPTION,
+  SPEEDRUN_MODE_DESCRIPTION,
 } from '../../constants/strings'
 
 type Props = {
@@ -15,6 +16,8 @@ type Props = {
   handleDarkMode: Function
   isHighContrastMode: boolean
   handleHighContrastMode: Function
+  isSpeedrunMode: boolean
+  handleSpeedrunMode: Function
   isManualShareText: boolean
   handleManualShareText: Function
 }
@@ -28,6 +31,8 @@ export const SettingsModal = ({
   handleDarkMode,
   isHighContrastMode,
   handleHighContrastMode,
+  isSpeedrunMode,
+  handleSpeedrunMode,
   isManualShareText,
   handleManualShareText,
 }: Props) => {
@@ -50,6 +55,12 @@ export const SettingsModal = ({
           flag={isHighContrastMode}
           handleFlag={handleHighContrastMode}
           description={HIGH_CONTRAST_MODE_DESCRIPTION}
+        />
+        <SettingsToggle
+          settingName="Speedrun Mode"
+          flag={isSpeedrunMode}
+          handleFlag={handleSpeedrunMode}
+          description={SPEEDRUN_MODE_DESCRIPTION}
         />
         <SettingsToggle
           settingName="Manual Share Text"
