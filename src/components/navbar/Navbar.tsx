@@ -9,9 +9,9 @@ import {
 // import { IconProp } from '@fortawesome/fontawesome-svg-core'
 // import fas from '@fortawesome/fontawesome-free-solid'
 import { Icon } from '@iconify/react';
+import { useNavigate } from 'react-router-dom';
 import { GAME_TITLE } from '../../constants/strings'
-import { useNavigate } from "react-router-dom";
-
+import { navigateAndRefresh } from '../../lib/navigation';
 
 type Props = {
   setIsInfoModalOpen: (value: boolean) => void
@@ -30,11 +30,7 @@ export const Navbar = ({
   dailyPath,
   randomPath,
 }: Props) => {
-  const navigate = useNavigate();
-  const navigateAndRefresh = (path: string) => {
-    navigate(path)
-    navigate(0)
-  }
+  const navigate = useNavigate()
   return (
     <div className="navbar">
       <div className="navbar-content px-5">
@@ -46,13 +42,13 @@ export const Navbar = ({
           {isPlayingRandom ? 
             <CalendarIcon
               className="h-6 w-6 cursor-pointer dark:stroke-white"
-              onClick={() => navigateAndRefresh(dailyPath)}
+              onClick={() => navigateAndRefresh(dailyPath, navigate)}
             />
             :
             <Icon
               icon="ph:dice-five-bold"
               className="h-6 w-6 cursor-pointer dark:stroke-white"
-              onClick={() => navigateAndRefresh(randomPath)}
+              onClick={() => navigateAndRefresh(randomPath, navigate)}
             />
           }
         </div>

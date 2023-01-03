@@ -44,17 +44,21 @@ import './App.css'
 import { AlertContainer } from './components/alerts/AlertContainer'
 import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
+import { navigateAndRefresh } from './lib/navigation'
 import { isInAppBrowser } from './lib/browser'
 
 import scoreService from './services/scores'
 import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 
-import { useMatch } from 'react-router-dom'
+import { useMatch, useNavigate } from 'react-router-dom'
 import { getWordBySolutionIndex } from './lib/words'
 import { exampleIds } from './constants/exampleIds'
 import { WORDS } from './constants/wordlist'
+import { RandomGameText } from './components/gametext/RandomGameText'
+import { StopwatchText } from './components/gametext/StopwatchText'
 
 function App() {
+  const navigate = useNavigate()
   const dailyPath = '/'
   const examplePath = '/examples/:id'
   const randomPath = '/random'
@@ -86,7 +90,6 @@ function App() {
     const exampleSolutionAndIndex = getWordBySolutionIndex(randomId)
     exampleSolution = exampleSolutionAndIndex.solution
     exampleSolutionIndex = exampleSolutionAndIndex.solutionIndex
-    console.log(exampleSolution, exampleSolutionIndex)
   }
   const solution =
     exampleSolution !== undefined ? exampleSolution : solutionOfDay
@@ -106,6 +109,7 @@ function App() {
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
+  const [isSolutionTextOpen, setIsSolutionTextOpen] = useState(false)
   const [currentRowClass, setCurrentRowClass] = useState('')
   const [isGameLost, setIsGameLost] = useState(false)
   const [isDarkMode, setIsDarkMode] = useState(
@@ -134,6 +138,8 @@ function App() {
       : false
   )
   const [isRevealing, setIsRevealing] = useState(false)
+  const [isStopwatchRunning, setIsStopwatchRunning] = useState(false)
+  const [timeMs, setTimeMs] = useState(0)
 
   const [guessesOfDay, setGuessesOfDay] = useState<string[]>(() => {
     const loaded = loadGameOfDayStateFromLocalStorage()
@@ -157,12 +163,14 @@ function App() {
     const gameWasWon = loaded.guesses.includes(solution)
     if (gameWasWon) {
       setIsGameWon(true)
+      setIsSolutionTextOpen(true)
     }
     if (loaded.guesses.length === MAX_CHALLENGES && !gameWasWon) {
       setIsGameLost(true)
       showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
         persist: true,
       })
+      setIsSolutionTextOpen(true)
     }
     return loaded.guesses
   })
@@ -251,11 +259,12 @@ function App() {
     saveGameOfDayStateToLocalStorage({ guesses, solution })
   }, [guessesOfDay])
 
+  const isGameComplete = isGameWon || isGameLost
   useEffect(() => {
+    const delayMs = REVEAL_TIME_MS * solution.length
     if (isGameWon) {
       const winMessage =
         WIN_MESSAGES[Math.floor(Math.random() * WIN_MESSAGES.length)]
-      const delayMs = REVEAL_TIME_MS * solution.length
 
       showSuccessAlert(winMessage, {
         delayMs,
@@ -268,7 +277,35 @@ function App() {
         setIsStatsModalOpen(true)
       }, (solution.length + 1) * REVEAL_TIME_MS)
     }
+
+    if (isGameComplete) {
+      setTimeout(() => {
+        setIsSolutionTextOpen(true)
+      }, delayMs)
+    }
   }, [isGameWon, isGameLost, showSuccessAlert])
+
+  useEffect(() => {
+    setIsStopwatchRunning(guesses.length >= 1 && !isGameComplete)
+  }, [guesses, isGameComplete])
+
+  useEffect(() => {
+    const timeIncrementMs = 10
+    let interval: NodeJS.Timeout | null = null
+
+    if (isStopwatchRunning) {
+      interval = setInterval(() => {
+        setTimeMs((timeMs) => timeMs + timeIncrementMs)
+      }, timeIncrementMs)
+    } else if (interval !== null) {
+      clearInterval(interval)
+    }
+    return () => {
+      if (interval !== null) {
+        clearInterval(interval)
+      }
+    }
+  }, [isStopwatchRunning])
 
   useEffect(() => {
     setRandomId(Math.floor(Math.random() * WORDS.length))
@@ -291,7 +328,10 @@ function App() {
   }
 
   const onEnter = () => {
-    if (isGameWon || isGameLost) {
+    if (isSolutionTextOpen) {
+      if (isPlayingRandom) {
+        navigateAndRefresh(randomPath, navigate)
+      }
       return
     }
 
@@ -435,6 +475,11 @@ function App() {
             currentGuess={currentGuess}
             isRevealing={isRevealing}
             currentRowClassName={currentRowClass}
+          />
+          <StopwatchText timeMs={timeMs} />
+          <RandomGameText
+            isPlayingRandom={isPlayingRandom}
+            isGameAnimationComplete={isSolutionTextOpen}
           />
         </div>
         <Keyboard
