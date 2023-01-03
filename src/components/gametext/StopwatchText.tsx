@@ -27,18 +27,3 @@ export const StopwatchText = ({ timeMs }: Props) => {
     </div>
   )
 }
-
-/*
-const timeIncrementMs = 10
-export const startTimer = (timeMs: number, setTimeMs: Dispatch<SetStateAction<number>>, interval: NodeJS.Timeout) => {
-  interval = setInterval(() => {
-    setTimeMs(timeMs + timeIncrementMs)
-  }, timeIncrementMs)
-}
-export const stopTimer = (interval: NodeJS.Timeout) => {
-  clearInterval(interval)
-}
-export const resetTimer = (setTimeMs: Dispatch<SetStateAction<number>>) => {
-  setTimeMs(0)
-}
-*/

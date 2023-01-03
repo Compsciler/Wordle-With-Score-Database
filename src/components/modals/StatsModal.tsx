@@ -50,7 +50,7 @@ export const StatsModal = ({
   isManualShareText,
 }: Props) => {
   const textToShare = getTextToShare(solution, solutionIndex, guesses, isGameLost,
-    isHardMode, isDarkMode, isHighContrastMode)
+    isHardMode, isDarkMode, isHighContrastMode, isPlayingRandom)
   
   return (
     <BaseModal
@@ -100,6 +100,7 @@ export const StatsModal = ({
                   isHardMode,
                   isDarkMode,
                   isHighContrastMode,
+                  isPlayingRandom,
                   handleShareToClipboard
                 )
               }}

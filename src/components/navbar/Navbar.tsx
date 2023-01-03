@@ -4,10 +4,6 @@ import {
   CogIcon,
   InformationCircleIcon,
 } from '@heroicons/react/outline'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faDiceFive } from '@fortawesome/fontawesome-free-solid'
-// import { IconProp } from '@fortawesome/fontawesome-svg-core'
-// import fas from '@fortawesome/fontawesome-free-solid'
 import { Icon } from '@iconify/react';
 import { useNavigate } from 'react-router-dom';
 import { GAME_TITLE } from '../../constants/strings'
