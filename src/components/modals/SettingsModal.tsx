@@ -1,11 +1,11 @@
-import { BaseModal } from './BaseModal'
-import { SettingsToggle } from './SettingsToggle'
 import {
   HARD_MODE_DESCRIPTION,
   HIGH_CONTRAST_MODE_DESCRIPTION,
   MANUAL_SHARE_TEXT_DESCRIPTION,
   SPEEDRUN_MODE_DESCRIPTION,
 } from '../../constants/strings'
+import { BaseModal } from './BaseModal'
+import { SettingsToggle } from './SettingsToggle'
 
 type Props = {
   isOpen: boolean
@@ -38,7 +38,7 @@ export const SettingsModal = ({
 }: Props) => {
   return (
     <BaseModal title="Settings" isOpen={isOpen} handleClose={handleClose}>
-      <div className="flex flex-col mt-2 divide-y">
+      <div className="mt-2 flex flex-col divide-y">
         <SettingsToggle
           settingName="Hard Mode"
           flag={isHardMode}

@@ -1,8 +1,8 @@
-import { getGuessStatuses } from './statuses'
-import { unicodeSplit } from './words'
-import { GAME_TITLE } from '../constants/strings'
-import { MAX_CHALLENGES } from '../constants/settings'
 import { UAParser } from 'ua-parser-js'
+import { unicodeSplit } from './words'
+import { MAX_CHALLENGES } from '../constants/settings'
+import { GAME_TITLE } from '../constants/strings'
+import { getGuessStatuses } from './statuses'
 
 const webShareApiDeviceTypes: string[] = ['mobile', 'smarttv', 'wearable']
 const parser = new UAParser()
@@ -19,7 +19,8 @@ export const shareStatus = (
   isDarkMode: boolean,
   isHighContrastMode: boolean,
   isPlayingRandom: boolean,
-  handleShareToClipboard: () => void
+  handleShareToClipboard: () => void,
+  handleShareFailure: () => void
 ) => {
   const textToShare = getTextToShare(solution, solutionIndex, guesses, lost,
     isHardMode, isDarkMode, isHighContrastMode, isPlayingRandom)
@@ -37,9 +38,19 @@ export const shareStatus = (
     shareSuccess = false
   }
 
-  if (!shareSuccess) {
-    navigator.clipboard.writeText(textToShare)
-    handleShareToClipboard()
+  try {
+    if (!shareSuccess) {
+      if (navigator.clipboard) {
+        navigator.clipboard
+          .writeText(textToShare)
+          .then(handleShareToClipboard)
+          .catch(handleShareFailure)
+      } else {
+        handleShareFailure()
+      }
+    }
+  } catch (error) {
+    handleShareFailure()
   }
 }
 

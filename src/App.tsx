@@ -1,61 +1,72 @@
-import { useState, useEffect } from 'react'
+import './App.css'
+import './App.css'
+
+import { ClockIcon } from '@heroicons/react/outline'
+import { format } from 'date-fns'
+import { default as GraphemeSplitter } from 'grapheme-splitter'
+import { useEffect, useState } from 'react'
+import Div100vh from 'react-div-100vh'
+import { useMatch, useNavigate } from 'react-router-dom'
+
+import { AlertContainer } from './components/alerts/AlertContainer'
+import { RandomGameText } from './components/gametext/RandomGameText'
+import { StopwatchText } from './components/gametext/StopwatchText'
 import { Grid } from './components/grid/Grid'
 import { Keyboard } from './components/keyboard/Keyboard'
+import { DatePickerModal } from './components/modals/DatePickerModal'
 import { InfoModal } from './components/modals/InfoModal'
-import { StatsModal } from './components/modals/StatsModal'
+import { MigrateStatsModal } from './components/modals/MigrateStatsModal'
 import { SettingsModal } from './components/modals/SettingsModal'
+import { StatsModal } from './components/modals/StatsModal'
+import { Navbar } from './components/navbar/Navbar'
+import { exampleIds } from './constants/exampleIds'
 import {
-  WIN_MESSAGES,
-  GAME_COPIED_MESSAGE,
-  NOT_ENOUGH_LETTERS_MESSAGE,
-  WORD_NOT_FOUND_MESSAGE,
-  CORRECT_WORD_MESSAGE,
-  HARD_MODE_ALERT_MESSAGE,
-  DISCOURAGE_INAPP_BROWSER_TEXT,
-} from './constants/strings'
-import {
+  DATE_LOCALE,
+  DISCOURAGE_INAPP_BROWSERS,
+  LONG_ALERT_TIME_MS,
   MAX_CHALLENGES,
   REVEAL_TIME_MS as REVEAL_TIME_MS_NORMAL,
   REVEAL_TIME_MS_SPEEDRUN,
   WELCOME_INFO_MODAL_MS,
-  DISCOURAGE_INAPP_BROWSERS,
 } from './constants/settings'
 import {
-  isWordInWordList,
-  isWinningWord,
-  isWinningWordOfDay,
-  solution as solutionOfDay,
-  findFirstUnusedReveal,
-  unicodeLength,
-  solutionIndex as solutionIndexOfDay,
-} from './lib/words'
+  CORRECT_WORD_MESSAGE,
+  DISCOURAGE_INAPP_BROWSER_TEXT,
+  GAME_COPIED_MESSAGE,
+  HARD_MODE_ALERT_MESSAGE,
+  NOT_ENOUGH_LETTERS_MESSAGE,
+  SHARE_FAILURE_TEXT,
+  WIN_MESSAGES,
+  WORD_NOT_FOUND_MESSAGE,
+} from './constants/strings'
+import { WORDS } from './constants/wordlist'
+import { useAlert } from './context/AlertContext'
+import { isInAppBrowser } from './lib/browser'
+import {
+  getStoredIsHighContrastMode,
+  loadGameOfDayStateFromLocalStorage,
+  loadGameStateFromLocalStorage,
+  saveGameOfDayStateToLocalStorage,
+  saveGameStateToLocalStorage,
+  setStoredIsHighContrastMode,
+} from './lib/localStorage'
+import { navigateAndRefresh } from './lib/navigation'
+import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 import { addStatsForCompletedGame, loadStats } from './lib/stats'
 import {
-  loadGameStateFromLocalStorage,
-  saveGameStateToLocalStorage,
-  loadGameOfDayStateFromLocalStorage,
-  saveGameOfDayStateToLocalStorage,
-  setStoredIsHighContrastMode,
-  getStoredIsHighContrastMode,
-} from './lib/localStorage'
-import { default as GraphemeSplitter } from 'grapheme-splitter'
-
-import './App.css'
-import { AlertContainer } from './components/alerts/AlertContainer'
-import { useAlert } from './context/AlertContext'
-import { Navbar } from './components/navbar/Navbar'
-import { navigateAndRefresh } from './lib/navigation'
-import { isInAppBrowser } from './lib/browser'
-
-import scoreService from './services/scores'
-import { generateEmojiGrid, getEmojiTiles } from './lib/share'
-
-import { useMatch, useNavigate } from 'react-router-dom'
+  findFirstUnusedReveal,
+  getGameDate,
+  getIsLatestGame,
+  isWinningWord,
+  isWinningWordOfDay,
+  isWordInWordList,
+  setGameDate,
+  solutionIndex as solutionIndexOfDay,
+  solution as solutionOfDay,
+  unicodeLength,
+} from './lib/words'
 import { getWordBySolutionIndex } from './lib/words'
-import { exampleIds } from './constants/exampleIds'
-import { WORDS } from './constants/wordlist'
-import { RandomGameText } from './components/gametext/RandomGameText'
-import { StopwatchText } from './components/gametext/StopwatchText'
+import scoreService from './services/scores'
 
 function App() {
   const navigate = useNavigate()
@@ -98,6 +109,8 @@ function App() {
       ? exampleSolutionIndex
       : solutionIndexOfDay
 
+  const isLatestGame = getIsLatestGame()
+  const gameDate = getGameDate()
   const prefersDarkMode = window.matchMedia(
     '(prefers-color-scheme: dark)'
   ).matches
@@ -108,6 +121,8 @@ function App() {
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isDatePickerModalOpen, setIsDatePickerModalOpen] = useState(false)
+  const [isMigrateStatsModalOpen, setIsMigrateStatsModalOpen] = useState(false)
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [isSolutionTextOpen, setIsSolutionTextOpen] = useState(false)
   const [currentRowClass, setCurrentRowClass] = useState('')
@@ -151,7 +166,7 @@ function App() {
   const [guesses, setGuesses] = useState<string[]>(() => {
     const loaded = isPlayingDaily
       ? loadGameOfDayStateFromLocalStorage()
-      : loadGameStateFromLocalStorage()
+      : loadGameStateFromLocalStorage(isLatestGame)
     if (loaded?.solution !== solution) {
       if (isPlayingDaily) {
         setGuessesOfDay([])
@@ -186,7 +201,7 @@ function App() {
   useEffect(() => {
     // if no game state on load,
     // show the user the how-to info modal
-    if (!loadGameStateFromLocalStorage()) {
+    if (!loadGameStateFromLocalStorage(true)) {
       setTimeout(() => {
         setIsInfoModalOpen(true)
       }, WELCOME_INFO_MODAL_MS)
@@ -250,7 +265,7 @@ function App() {
   }
 
   useEffect(() => {
-    saveGameStateToLocalStorage({ guesses, solution })
+    saveGameStateToLocalStorage(getIsLatestGame(), { guesses, solution })
   }, [guesses])
   useEffect(() => {
     if (!isPlayingDaily) {
@@ -399,6 +414,9 @@ function App() {
           false,
           isHardMode
         )
+        if (isLatestGame) {
+          setStats(addStatsForCompletedGame(stats, guesses.length))
+        }
         return setIsGameWon(true)
       }
 
@@ -413,6 +431,9 @@ function App() {
           true,
           isHardMode
         )
+        if (isLatestGame) {
+          setStats(addStatsForCompletedGame(stats, guesses.length + 1))
+        }
         setIsGameLost(true)
         showErrorAlert(CORRECT_WORD_MESSAGE(solution), {
           persist: true,
@@ -451,30 +472,51 @@ function App() {
 
   if (isReturningExampleNotFoundPage) {
     return (
-      <p className="flex justify-center mt-4 dark:text-white text-lg">
+      <p className="mt-4 flex justify-center text-lg dark:text-white">
         ERROR: EXAMPLE NOT FOUND
       </p>
     )
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <Navbar
-        setIsInfoModalOpen={setIsInfoModalOpen}
-        setIsStatsModalOpen={setIsStatsModalOpen}
-        setIsSettingsModalOpen={setIsSettingsModalOpen}
-        isPlayingRandom={isPlayingRandom}
-        dailyPath={dailyPath}
-        randomPath={randomPath}
-      />
-      <div className="pt-2 px-1 pb-8 md:max-w-7xl w-full mx-auto sm:px-6 lg:px-8 flex flex-col grow">
-        <div className="pb-6 grow">
-          <Grid
+    <Div100vh>
+      <div className="flex h-full flex-col">
+        <Navbar
+          setIsInfoModalOpen={setIsInfoModalOpen}
+          setIsStatsModalOpen={setIsStatsModalOpen}
+          setIsDatePickerModalOpen={setIsDatePickerModalOpen}
+          setIsSettingsModalOpen={setIsSettingsModalOpen}
+          isPlayingRandom={isPlayingRandom}
+          dailyPath={dailyPath}
+          randomPath={randomPath}
+        />
+
+        {!isLatestGame && (
+          <div className="flex items-center justify-center">
+            <ClockIcon className="h-6 w-6 stroke-gray-600 dark:stroke-gray-300" />
+            <p className="text-base text-gray-600 dark:text-gray-300">
+              {format(gameDate, 'd MMMM yyyy', { locale: DATE_LOCALE })}
+            </p>
+          </div>
+        )}
+
+        <div className="mx-auto flex w-full grow flex-col px-1 pt-2 pb-8 sm:px-6 md:max-w-7xl lg:px-8 short:pb-2 short:pt-2">
+          <div className="flex grow flex-col justify-center pb-6 short:pb-2">
+            <Grid
+              solution={solution}
+              guesses={guesses}
+              currentGuess={currentGuess}
+              isRevealing={isRevealing}
+              currentRowClassName={currentRowClass}
+            />
+          </div>
+          <Keyboard
+            onChar={onChar}
+            onDelete={onDelete}
+            onEnter={onEnter}
             solution={solution}
             guesses={guesses}
-            currentGuess={currentGuess}
             isRevealing={isRevealing}
-            currentRowClassName={currentRowClass}
           />
           <StopwatchText timeMs={timeMs} />
           <RandomGameText
@@ -482,14 +524,6 @@ function App() {
             isGameAnimationComplete={isSolutionTextOpen}
           />
         </div>
-        <Keyboard
-          onChar={onChar}
-          onDelete={onDelete}
-          onEnter={onEnter}
-          solution={solution}
-          guesses={guesses}
-          isRevealing={isRevealing}
-        />
         <InfoModal
           isOpen={isInfoModalOpen}
           handleClose={() => setIsInfoModalOpen(false)}
@@ -501,9 +535,19 @@ function App() {
           solutionIndex={solutionIndex}
           guesses={guesses}
           gameStats={stats}
+          isLatestGame={isLatestGame}
           isGameLost={isGameLost}
           isGameWon={isGameWon}
           handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
+          handleShareFailure={() =>
+            showErrorAlert(SHARE_FAILURE_TEXT, {
+              durationMs: LONG_ALERT_TIME_MS,
+            })
+          }
+          handleMigrateStatsButton={() => {
+            setIsStatsModalOpen(false)
+            setIsMigrateStatsModalOpen(true)
+          }}
           isHardMode={isHardMode}
           isDarkMode={isDarkMode}
           isHighContrastMode={isHighContrastMode}
@@ -511,6 +555,18 @@ function App() {
           isPlayingExample={isPlayingExample}
           isPlayingRandom={isPlayingRandom}
           isManualShareText={isManualShareText}
+        />
+        <DatePickerModal
+          isOpen={isDatePickerModalOpen}
+          handleSelectDate={(d) => {
+            setIsDatePickerModalOpen(false)
+            setGameDate(d)
+          }}
+          handleClose={() => setIsDatePickerModalOpen(false)}
+        />
+        <MigrateStatsModal
+          isOpen={isMigrateStatsModalOpen}
+          handleClose={() => setIsMigrateStatsModalOpen(false)}
         />
         <SettingsModal
           isOpen={isSettingsModalOpen}
@@ -528,7 +584,7 @@ function App() {
         />
         <AlertContainer />
       </div>
-    </div>
+    </Div100vh>
   )
 }
 

@@ -1,9 +1,24 @@
-import { WORDS } from '../constants/wordlist'
-import { VALID_GUESSES } from '../constants/validGuesses'
-import { WRONG_SPOT_MESSAGE, NOT_CONTAINED_MESSAGE } from '../constants/strings'
-import { getGuessStatuses } from './statuses'
+import {
+  addDays,
+  differenceInDays,
+  formatISO,
+  parseISO,
+  startOfDay,
+} from 'date-fns'
 import { default as GraphemeSplitter } from 'grapheme-splitter'
 // import { isValidKey } from '../components/keyboard/Keyboard'
+import queryString from 'query-string'
+
+import { ENABLE_ARCHIVED_GAMES } from '../constants/settings'
+import { NOT_CONTAINED_MESSAGE, WRONG_SPOT_MESSAGE } from '../constants/strings'
+import { VALID_GUESSES } from '../constants/validGuesses'
+import { WORDS } from '../constants/wordlist'
+import { getToday } from './dateutils'
+import { getGuessStatuses } from './statuses'
+
+// 1 January 2022 Game Epoch
+export const firstGameDate = new Date(2022, 0)
+export const periodInDays = 1
 
 export const isWordInWordList = (word: string) => {
   return (
@@ -91,6 +106,35 @@ export const localeAwareUpperCase = (text: string) => {
     : text.toUpperCase()
 }
 
+export const getLastGameDate = (today: Date) => {
+  const t = startOfDay(today)
+  let daysSinceLastGame = differenceInDays(firstGameDate, t) % periodInDays
+  return addDays(t, -daysSinceLastGame)
+}
+
+export const getNextGameDate = (today: Date) => {
+  return addDays(getLastGameDate(today), periodInDays)
+}
+
+export const isValidGameDate = (date: Date) => {
+  if (date < firstGameDate || date > getToday()) {
+    return false
+  }
+
+  return differenceInDays(firstGameDate, date) % periodInDays === 0
+}
+
+export const getIndex = (gameDate: Date) => {
+  let start = firstGameDate
+  let index = -1
+  do {
+    index++
+    start = addDays(start, periodInDays)
+  } while (start <= gameDate)
+
+  return index
+}
+
 export const getWordBySolutionIndex = (solutionIndex: number) => {
   if (solutionIndex < 0 || solutionIndex >= WORDS.length) {
     return {
@@ -126,6 +170,44 @@ export const getWordOfDay = () => {
     solutionIndex: solutionAndIndex.solutionIndex,
     tomorrow: nextDay.valueOf(),
   }
+}
+
+export const getGameDate = () => {
+  if (getIsLatestGame()) {
+    return getToday()
+  }
+
+  const parsed = queryString.parse(window.location.search)
+  try {
+    const d = startOfDay(parseISO(parsed.d!.toString()))
+    if (d >= getToday() || d < firstGameDate) {
+      setGameDate(getToday())
+    }
+    return d
+  } catch (e) {
+    console.log(e)
+    return getToday()
+  }
+}
+
+export const setGameDate = (d: Date) => {
+  try {
+    if (d < getToday()) {
+      window.location.href = '/?d=' + formatISO(d, { representation: 'date' })
+      return
+    }
+  } catch (e) {
+    console.log(e)
+  }
+  window.location.href = '/'
+}
+
+export const getIsLatestGame = () => {
+  if (!ENABLE_ARCHIVED_GAMES) {
+    return true
+  }
+  const parsed = queryString.parse(window.location.search)
+  return parsed === null || !('d' in parsed)
 }
 
 export const { solution, solutionIndex, tomorrow } = getWordOfDay()

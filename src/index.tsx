@@ -1,10 +1,12 @@
+import './index.css'
+
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+
 import App from './App'
-import reportWebVitals from './reportWebVitals'
 import { AlertProvider } from './context/AlertContext'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
