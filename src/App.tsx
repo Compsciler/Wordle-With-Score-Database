@@ -52,14 +52,23 @@ import { generateEmojiGrid, getEmojiTiles } from './lib/share'
 import { useMatch } from 'react-router-dom'
 import { getWordBySolutionIndex } from './lib/words'
 import { exampleIds } from './constants/exampleIds'
+import { WORDS } from './constants/wordlist'
 
 function App() {
-  const isPlayingDaily = useMatch('/') !== null
-  const exampleMatch = useMatch('/examples/:id')
+  const dailyPath = '/'
+  const examplePath = '/examples/:id'
+  const randomPath = '/random'
+  const isPlayingDaily = useMatch(dailyPath) !== null
+  const exampleMatch = useMatch(examplePath)
+  const randomMatch = useMatch(randomPath)
   const isPlayingExample = exampleMatch !== null
+  const isPlayingRandom = randomMatch !== null
+  const isNotPlayingDaily = isPlayingExample || isPlayingRandom
   let exampleSolution = undefined
   let exampleSolutionIndex = undefined
   let isReturningExampleNotFoundPage = false
+  const [randomId, setRandomId] = useState(-1)
+
   if (exampleMatch) {
     const id = parseInt(exampleMatch.params.id!)
     if (!exampleIds.includes(id)) {
@@ -73,6 +82,11 @@ function App() {
         isReturningExampleNotFoundPage = true
       }
     }
+  } else if (randomMatch) {
+    const exampleSolutionAndIndex = getWordBySolutionIndex(randomId)
+    exampleSolution = exampleSolutionAndIndex.solution
+    exampleSolutionIndex = exampleSolutionAndIndex.solutionIndex
+    console.log(exampleSolution, exampleSolutionIndex)
   }
   const solution =
     exampleSolution !== undefined ? exampleSolution : solutionOfDay
@@ -256,6 +270,10 @@ function App() {
     }
   }, [isGameWon, isGameLost, showSuccessAlert])
 
+  useEffect(() => {
+    setRandomId(Math.floor(Math.random() * WORDS.length))
+  }, [randomMatch])
+
   const onChar = (value: string) => {
     if (
       unicodeLength(`${currentGuess}${value}`) <= solution.length &&
@@ -313,7 +331,7 @@ function App() {
       setIsRevealing(false)
     }, REVEAL_TIME_MS * solution.length)
 
-    const winningWord = isPlayingExample
+    const winningWord = isNotPlayingDaily
       ? isWinningWord(currentGuess, solution)
       : isWinningWordOfDay(currentGuess)
 
@@ -331,7 +349,7 @@ function App() {
       setCurrentGuess('')
 
       if (winningWord) {
-        if (!isPlayingExample) {
+        if (!isNotPlayingDaily) {
           setStats(addStatsForCompletedGame(stats, guesses.length))
         }
         sendScore(
@@ -345,7 +363,7 @@ function App() {
       }
 
       if (guesses.length === MAX_CHALLENGES - 1) {
-        if (!isPlayingExample) {
+        if (!isNotPlayingDaily) {
           setStats(addStatsForCompletedGame(stats, guesses.length + 1))
         }
         sendScore(
@@ -405,6 +423,9 @@ function App() {
         setIsInfoModalOpen={setIsInfoModalOpen}
         setIsStatsModalOpen={setIsStatsModalOpen}
         setIsSettingsModalOpen={setIsSettingsModalOpen}
+        isPlayingRandom={isPlayingRandom}
+        dailyPath={dailyPath}
+        randomPath={randomPath}
       />
       <div className="pt-2 px-1 pb-8 md:max-w-7xl w-full mx-auto sm:px-6 lg:px-8 flex flex-col grow">
         <div className="pb-6 grow">
@@ -443,6 +464,7 @@ function App() {
           isHighContrastMode={isHighContrastMode}
           numberOfGuessesMade={guesses.length}
           isPlayingExample={isPlayingExample}
+          isPlayingRandom={isPlayingRandom}
           isManualShareText={isManualShareText}
         />
         <SettingsModal

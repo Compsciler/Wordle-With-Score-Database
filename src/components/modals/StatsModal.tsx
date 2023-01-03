@@ -27,6 +27,7 @@ type Props = {
   isHighContrastMode: boolean
   numberOfGuessesMade: number
   isPlayingExample: boolean
+  isPlayingRandom: boolean
   isManualShareText: boolean
 }
 
@@ -45,6 +46,7 @@ export const StatsModal = ({
   isHighContrastMode,
   numberOfGuessesMade,
   isPlayingExample,
+  isPlayingRandom,
   isManualShareText,
 }: Props) => {
   const textToShare = getTextToShare(solution, solutionIndex, guesses, isGameLost,
@@ -68,6 +70,11 @@ export const StatsModal = ({
       {isPlayingExample && (
         <div className="mt-5 dark:text-white">
           <h5>(Statistics not affected by example games)</h5>
+        </div>
+      )}
+      {isPlayingRandom && (
+        <div className="mt-5 dark:text-white">
+          <h5>(Statistics not affected by random games)</h5>
         </div>
       )}
       {(isGameLost || isGameWon) && (
