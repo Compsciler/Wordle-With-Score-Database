@@ -57,6 +57,7 @@ import { exampleIds } from './constants/exampleIds'
 import { WORDS } from './constants/wordlist'
 import { RandomGameText } from './components/gametext/RandomGameText'
 import { StopwatchText } from './components/gametext/StopwatchText'
+import { PromoText } from './components/gametext/PromoText'
 
 function App() {
   const navigate = useNavigate()
@@ -459,6 +460,14 @@ function App() {
     )
   }
 
+  const formatLink = (text: string, href: string) => {
+    return `<a href="${href}" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600" target="_blank">${text}</a>`
+  }
+
+  const youtubeChannelLink = 'https://www.youtube.com/@wangle0'
+  const promoText = `[...]<br/> \
+      [...] ${formatLink('YouTube channel', youtubeChannelLink)}!`
+
   return (
     <div className="h-screen flex flex-col">
       <Navbar
@@ -469,6 +478,7 @@ function App() {
         dailyPath={dailyPath}
         randomPath={randomPath}
       />
+      {/* <PromoText text={promoText} /> */}
       <div className="pt-2 px-1 pb-8 md:max-w-7xl w-full mx-auto sm:px-6 lg:px-8 flex flex-col grow">
         <div className="pb-6 grow">
           <Grid
@@ -478,7 +488,7 @@ function App() {
             isRevealing={isRevealing}
             currentRowClassName={currentRowClass}
           />
-          <StopwatchText timeMs={timeMs} />
+          <StopwatchText timeMs={timeMs} isSpeedrunMode={isSpeedrunMode} />
           <RandomGameText
             isPlayingRandom={isPlayingRandom}
             isGameAnimationComplete={isSolutionTextOpen}

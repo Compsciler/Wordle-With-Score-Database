@@ -1,5 +1,6 @@
 type Props = {
   timeMs: number
+  isSpeedrunMode: boolean
 }
 
 const styles = {
@@ -8,7 +9,11 @@ const styles = {
 
 const classes = "flex justify-center mt-4 ml-2 mr-2 text-center dark:text-white"
 
-export const StopwatchText = ({ timeMs }: Props) => {
+export const StopwatchText = ({ timeMs, isSpeedrunMode }: Props) => {
+  if (!isSpeedrunMode) {
+    return <></>
+  }
+  
   const MS_IN_HOUR = 1000 * 60 * 60
   const MS_IN_DAY = MS_IN_HOUR * 24
   const getFormattedTime = () => {
