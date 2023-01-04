@@ -7,7 +7,7 @@ const styles = {
   fontSize: '18px',
 }
 
-const classes = "flex justify-center mt-4 ml-2 mr-2 text-center dark:text-white"
+const classes = "flex justify-center ml-2 mr-2 text-center dark:text-white"
 
 export const StopwatchText = ({ timeMs, isSpeedrunMode }: Props) => {
   if (!isSpeedrunMode) {

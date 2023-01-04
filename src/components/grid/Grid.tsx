@@ -24,7 +24,7 @@ export const Grid = ({
       : []
 
   return (
-    <>
+    <div className="mb-4">
       {guesses.map((guess, i) => (
         <CompletedRow
           key={i}
@@ -39,6 +39,6 @@ export const Grid = ({
       {empties.map((_, i) => (
         <EmptyRow solution={solution} key={i} />
       ))}
-    </>
+    </div>
   )
 }
