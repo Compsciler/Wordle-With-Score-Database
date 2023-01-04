@@ -138,7 +138,7 @@ docker build --target=prod -t reactle:prod -f docker/Dockerfile .
 docker run -d -p 80:8080  --name reactle-prod reactle:prod
 ```
 
-Open [http://localhost](http://localhost) in browser.
+Open [http://localhost](http://localhost) in browser. See the [entry in the FAQ](#why-does-sharing-of-results-not-work) below about requirements for sharing of results.
 
 ## My Wordle spinoff games
 
@@ -220,6 +220,12 @@ Note that guesses are validated against both the length of the solution, and pre
 - Add a list of goal words in the language to [src/constants/wordlist.ts](src/constants/wordlist.ts), replacing the English words
 - Update the "Settings" modal in [src/components/modals/SettingsModal.tsx](src/components/modals/SettingsModal.tsx)
 - Update the "Info" modal in [src/components/modals/InfoModal.tsx](src/components/modals/InfoModal.tsx)
+- Update the statistics migration components modal in:
+  - [src/components/stats/MigrationIntro.tsx](src/components/stats/MigrationIntro.tsx)
+  - [src/components/stats/EmigratePanel.tsx](src/components/stats/EmigratePanel.tsx)
+  - [src/components/stats/ImmigratePanel.tsx](src/components/stats/ImmigratePanel.tsx)
+  - [src/components/modals/MigrateStatsModal.tsx](src/components/modals/MigrateStatsModal.tsx)
+- To ensure that migration codes are unique to your application, update the Blowfish encryption key and initialization vector with random 30 character and 8 character strings in [src/constants/settings.ts](src/constants/settings.ts)
 - If the language has letters that are not present in English update the keyboard in [src/components/keyboard/Keyboard.tsx](src/components/keyboard/Keyboard.tsx)
 - If the language is written right-to-left, prepend `\u202E` (the unicode right-to-left override character) to the return statement of the inner function in `generateEmojiGrid` in [src/lib/share.ts](src/lib/share.ts)
 
@@ -238,3 +244,7 @@ To enable Plausible Analytics:
 
 - Create a new website with Plausible Analytics with a given domain, e.g. `example.app`
 - In [.env](.env), add `REACT_APP_PLAUSIBLE_DOMAIN=example.app`
+
+### Why does sharing of results not work?
+
+For mobile and wearable devices and smart TVs, sharing of results is initially attempted using the [Web Share API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API). For other devices or when sharing to the Web Share API fails, the results are written to the clipboard. Both these methods will succeed only in a [secure context](https://developer.mozilla.org/en-US/docs/Web/Security/Secure_Contexts), which require you to implement the HTTPS protocol when hosting this repo on a public domain.

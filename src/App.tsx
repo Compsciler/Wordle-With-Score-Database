@@ -46,6 +46,7 @@ import { useAlert } from './context/AlertContext'
 import { Navbar } from './components/navbar/Navbar'
 import { navigateAndRefresh } from './lib/navigation'
 import { isInAppBrowser } from './lib/browser'
+import { MigrateStatsModal } from './components/modals/MigrateStatsModal'
 
 import scoreService from './services/scores'
 import { generateEmojiGrid, getEmojiTiles } from './lib/share'
@@ -108,6 +109,7 @@ function App() {
   const [isGameWon, setIsGameWon] = useState(false)
   const [isInfoModalOpen, setIsInfoModalOpen] = useState(false)
   const [isStatsModalOpen, setIsStatsModalOpen] = useState(false)
+  const [isMigrateStatsModalOpen, setIsMigrateStatsModalOpen] = useState(false)
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false)
   const [isSolutionTextOpen, setIsSolutionTextOpen] = useState(false)
   const [currentRowClass, setCurrentRowClass] = useState('')
@@ -504,6 +506,10 @@ function App() {
           isGameLost={isGameLost}
           isGameWon={isGameWon}
           handleShareToClipboard={() => showSuccessAlert(GAME_COPIED_MESSAGE)}
+          handleMigrateStatsButton={() => {
+            setIsStatsModalOpen(false)
+            setIsMigrateStatsModalOpen(true)
+          }}
           isHardMode={isHardMode}
           isDarkMode={isDarkMode}
           isHighContrastMode={isHighContrastMode}
@@ -511,6 +517,10 @@ function App() {
           isPlayingExample={isPlayingExample}
           isPlayingRandom={isPlayingRandom}
           isManualShareText={isManualShareText}
+        />
+        <MigrateStatsModal
+          isOpen={isMigrateStatsModalOpen}
+          handleClose={() => setIsMigrateStatsModalOpen(false)}
         />
         <SettingsModal
           isOpen={isSettingsModalOpen}
