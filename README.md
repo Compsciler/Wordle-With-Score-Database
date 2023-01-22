@@ -12,7 +12,7 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 
 1. GitHub: Create an empty repository for the new game
 2. Terminal: Clone this repository as an independent copy: [see below](#step-1-commands)
-3. Terminal: Run `npm install`
+3. Terminal: Run `npm install --legacy-peer-deps`
 4. [MongoDB Atlas](https://cloud.mongodb.com/): Create a new project and cluster under that project: [tutorial](https://www.freecodecamp.org/news/get-started-with-mongodb-atlas/)
 5. [.env](.env): Set `MONGODB_URI` to the cluster URI
 6. [Heroku Dashboard](https://dashboard.heroku.com/): Click `New` > `Create new app` to create app
@@ -28,7 +28,7 @@ This is an enhanced clone project (forked from [here](https://github.com/cwacker
 
 Advanced variant changes (such as adding a new language or new rules) will involve changing more components.
 
-### Step 1 commands
+### Step 2 commands
 
 [Original tutorial](https://handong1587.github.io/linux_study/2015/12/18/create-multi-forks.html)
 ```bash
