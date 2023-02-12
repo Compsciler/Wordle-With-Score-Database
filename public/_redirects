@@ -1,0 +1,8 @@
+# Redirect root path to index.html
+/ /index.html 200
+
+# Redirect example routes to index.html
+/examples/* /index.html 200
+
+# Redirect random route to index.html
+/random /index.html 200
